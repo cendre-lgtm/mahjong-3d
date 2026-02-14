@@ -20,125 +20,78 @@
         /* 慶祝特效 Canvas */
         #celebration-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 95; /* 在 UI 下方但在 3D 上方，或蓋在最上面 */
+            pointer-events: none; z-index: 95;
         }
 
-        /* 節慶按鈕樣式 - 響應式調整 */
+        /* 節慶按鈕 */
         .btn-festive { 
             background: linear-gradient(135deg, #d4af37 0%, #aa8a2e 100%); 
-            color: #4a0404;
-            border-radius: 12px; 
-            font-weight: 900; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            transition: all 0.1s;
-            border: 2px solid #fff5d7;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.3);
-            padding: 10px 16px;
-            font-size: 1.1rem;
-            min-width: 70px;
+            color: #4a0404; border-radius: 12px; font-weight: 900; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5); transition: all 0.1s;
+            border: 2px solid #fff5d7; text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+            padding: 10px 16px; font-size: 1.1rem; min-width: 70px;
         }
-        @media (min-width: 768px) {
-            .btn-festive {
-                padding: 14px 24px;
-                font-size: 1.3rem;
-                min-width: 90px;
-            }
-        }
+        @media (min-width: 768px) { .btn-festive { padding: 14px 24px; font-size: 1.3rem; min-width: 90px; } }
         .btn-festive:active { transform: scale(0.95); }
         .btn-festive:disabled { filter: grayscale(1); opacity: 0.5; pointer-events: none; }
         
-        /* 亮起的胡牌按鈕特效 */
         .btn-hu-active {
             animation: pulse-gold 1.5s infinite;
             background: linear-gradient(135deg, #ff0000 0%, #990000 100%) !important;
-            color: white !important;
-            border-color: #ffd700 !important;
-            box-shadow: 0 0 25px #ff0000 !important;
-            transform: scale(1.1);
+            color: white !important; border-color: #ffd700 !important;
+            box-shadow: 0 0 25px #ff0000 !important; transform: scale(1.1);
         }
-        @keyframes pulse-gold {
-            0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 215, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); }
-        }
+        @keyframes pulse-gold { 0% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.7); } 100% { box-shadow: 0 0 0 0 rgba(255, 215, 0, 0); } }
 
         .gold-text { color: #d4af37; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
         .red-panel { background: rgba(139, 0, 0, 0.85); border: 2px solid #d4af37; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
         
-        /* 結束按鈕特別樣式 */
         .btn-exit {
             background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
-            color: white; border: 2px solid #e74c3c;
-            border-radius: 50px; 
-            font-weight: bold; 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            display: flex; align-items: center; gap: 5px;
-            padding: 6px 12px; font-size: 0.8rem;
+            color: white; border: 2px solid #e74c3c; border-radius: 50px; 
+            font-weight: bold; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 5px; padding: 6px 12px; font-size: 0.8rem;
         }
         @media (min-width: 768px) { .btn-exit { padding: 8px 16px; font-size: 0.9rem; } }
         .btn-exit:active { transform: scale(0.95); }
 
-        /* 驚喜動畫 */
-        @keyframes firework {
-            0% { transform: scale(0.5); opacity: 0; }
-            50% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-        .surprise-text { animation: firework 0.5s ease-out forwards; }
-
-        /* 特寫動畫 */
         .preview-anim { animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-        /* 操作指引提示 */
         .tutorial-hint { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
 
-        /* 右下角功能按鈕群 */
         .ctrl-btn {
-            background: rgba(0,0,0,0.6); border: 1px solid #d4af37;
-            color: #d4af37; border-radius: 50%; 
+            background: rgba(0,0,0,0.6); border: 1px solid #d4af37; color: #d4af37; border-radius: 50%; 
             display: flex; align-items: center; justify-content: center;
-            pointer-events: auto; cursor: pointer; margin-top: 10px;
-            transition: all 0.3s;
+            pointer-events: auto; cursor: pointer; margin-top: 10px; transition: all 0.3s;
             width: 40px; height: 40px; font-size: 20px;
         }
-        @media (min-width: 768px) { .ctrl-btn { width: 50px; height: 50px; font-size: 24px; } }
         .ctrl-btn.active { background: #d4af37; color: #000; box-shadow: 0 0 10px #d4af37; }
-        
         .hidden-ctrl { display: none !important; }
 
-        /* 特寫預覽區互動樣式 */
-        #preview-box.interactive-preview {
-            cursor: pointer;
-            pointer-events: auto;
-            transition: transform 0.1s ease;
-        }
-        #preview-box.interactive-preview:active {
-            transform: scale(0.85) !important; /* 點擊時縮小效果 */
-        }
+        #preview-box.interactive-preview { cursor: pointer; pointer-events: auto; transition: transform 0.1s ease; }
+        #preview-box.interactive-preview:active { transform: scale(0.85) !important; }
         
-        /* 扣款動畫 */
-        @keyframes fadeUp {
-            0% { opacity: 1; transform: translateY(0); }
-            100% { opacity: 0; transform: translateY(-20px); }
-        }
-        .deduct-anim {
-            position: absolute;
-            color: #ff4d4d;
-            font-weight: bold;
-            animation: fadeUp 1s forwards;
-            pointer-events: none;
-        }
+        @keyframes fadeUp { 0% { opacity: 1; transform: translateY(0); } 100% { opacity: 0; transform: translateY(-20px); } }
+        .deduct-anim { position: absolute; color: #ff4d4d; font-weight: bold; animation: fadeUp 1s forwards; pointer-events: none; }
         
-        /* 吃牌選擇按鈕 */
         .btn-chi-select {
             background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-            border: 2px solid #6ee7b7; color: white;
-            padding: 10px 20px; border-radius: 12px; font-size: 1.5rem;
+            border: 2px solid #6ee7b7; color: white; padding: 10px 20px; border-radius: 12px; font-size: 1.5rem;
             display: flex; gap: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
         .btn-chi-select:active { transform: scale(0.95); }
+
+        /* 聽牌提示 */
+        .tenpai-alert {
+            position: absolute; top: -50px; left: 50%; transform: translateX(-50%);
+            background: #ef4444; color: #fcd34d; font-weight: 900;
+            padding: 5px 15px; border-radius: 20px; border: 2px solid #fcd34d;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.8);
+            animation: bounce 1s infinite; pointer-events: none; white-space: nowrap;
+        }
+        @keyframes bounce { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-10px); } }
     </style>
 </head>
 <body>
@@ -153,25 +106,18 @@
 <!-- UI 圖層 -->
 <div id="ui-layer" class="flex flex-col justify-between p-2 md:p-4 h-full">
     <div class="flex justify-between items-start interactive w-full">
-        <!-- 左上角資訊區 -->
+        <!-- 左上 -->
         <div class="flex flex-col gap-2 items-start max-w-[45%]">
-            <button onclick="returnToMenu()" class="btn-exit">
-                <span>🏠</span> <span class="hidden sm:inline">結束牌局</span><span class="sm:hidden">結束</span>
-            </button>
+            <button onclick="game.showMenu()" class="btn-exit"><span>🏠</span> <span class="hidden sm:inline">結束牌局</span><span class="sm:hidden">結束</span></button>
             <div id="game-info" class="red-panel text-white p-2 md:p-3 rounded-xl text-xs md:text-sm backdrop-blur-md shadow-lg w-full relative">
-                <div class="whitespace-nowrap flex items-center gap-2">
-                    <span class="text-yellow-400">💰 代幣:</span> 
-                    <span id="credit-count" class="font-mono font-bold text-white">10000</span>
-                </div>
+                <div class="flex items-center gap-2"><span class="text-yellow-400">💰:</span><span id="credit-count" class="font-mono font-bold">10000</span></div>
                 <div class="w-full h-[1px] bg-white/20 my-1"></div>
-                <div class="whitespace-nowrap">模式: <span id="mode-display" class="font-bold text-yellow-300">-</span></div>
-                <div class="whitespace-nowrap">風圈: <span class="text-yellow-100 font-bold">東風</span></div>
-                <div class="whitespace-nowrap">牌數: <span id="wall-count" class="font-mono text-yellow-200">--</span></div>
-                <div class="mt-1 text-[10px] text-yellow-500/60">♪ Audio Source: Music by 胤樂音樂</div>
+                <div>模式: <span id="mode-display" class="font-bold text-yellow-300">-</span></div>
+                <div>剩餘: <span id="wall-count" class="font-mono text-yellow-200">--</span></div>
+                <div class="mt-1 text-[10px] text-yellow-500/60">♪ Music by 胤樂音樂</div>
             </div>
         </div>
-
-        <!-- 右上角分數板 -->
+        <!-- 右上 -->
         <div id="score-board" class="red-panel text-white p-2 md:p-3 rounded-xl text-xs md:text-sm text-right backdrop-blur-md shadow-lg max-w-[50%]">
             <div id="p0-ui" class="gold-text transition-all duration-300">玩家 1: <span id="s0">25000</span></div>
             <div id="p1-ui" class="transition-all duration-300">玩家 2: <span id="s1">25000</span></div>
@@ -180,9 +126,8 @@
         </div>
     </div>
 
-    <!-- 選牌/出牌 特寫預覽區 (白底，深色字) -->
+    <!-- 中間區域 -->
     <div id="preview-overlay" class="pointer-events-none fixed inset-0 flex flex-col items-center justify-center z-30 opacity-0 transition-opacity duration-200">
-        <!-- 牌面特寫 (新增點擊出牌功能) -->
         <div class="bg-white/95 p-4 md:p-6 rounded-3xl border-4 border-yellow-600 backdrop-blur-md shadow-2xl flex flex-col items-center transform scale-75 md:scale-90 mb-2 md:mb-6 interactive-preview" 
              id="preview-box" onclick="game.confirmDiscardFromPreview()">
             <div id="preview-emoji" class="text-8xl md:text-[9rem] leading-none mb-2 filter drop-shadow-[0_5px_15px_rgba(0,0,0,0.3)]">🀄</div>
@@ -190,64 +135,58 @@
             <div id="preview-sub" class="text-gray-600 text-xs md:text-sm mt-1 font-bold text-center"></div>
             <div id="preview-hint" class="text-green-600 text-xs mt-2 font-bold animate-pulse hidden">(點擊此處出牌)</div>
         </div>
-
-        <!-- 動作按鈕群 -->
         <div id="action-btns" class="flex flex-wrap justify-center gap-2 md:gap-3 hidden pointer-events-auto transform scale-90 md:scale-100 max-w-[90vw]">
-            <button id="btn-chi" onclick="game.handlePlayerAction('chi')" class="btn-festive bg-green-600 text-white border-green-300 shadow-[0_0_20px_rgba(34,197,94,0.6)]">吃</button>
-            <button id="btn-pon" onclick="game.handlePlayerAction('pon')" class="btn-festive bg-blue-600 text-white border-blue-300 shadow-[0_0_20px_rgba(59,130,246,0.6)]">碰</button>
-            <button id="btn-kan" onclick="game.handlePlayerAction('kan')" class="btn-festive bg-purple-600 text-white border-purple-300 shadow-[0_0_20px_rgba(147,51,234,0.6)]">槓</button>
+            <button id="btn-chi" onclick="game.handlePlayerAction('chi')" class="btn-festive bg-green-600 text-white border-green-300">吃</button>
+            <button id="btn-pon" onclick="game.handlePlayerAction('pon')" class="btn-festive bg-blue-600 text-white border-blue-300">碰</button>
+            <button id="btn-kan" onclick="game.handlePlayerAction('kan')" class="btn-festive bg-purple-600 text-white border-purple-300">槓</button>
             <button id="btn-hu" onclick="game.handlePlayerAction('hu')" class="btn-festive !bg-red-600 !text-white !border-white !shadow-[0_0_25px_rgba(220,38,38,0.8)]">胡</button>
             <button id="btn-skip" onclick="game.handlePlayerAction('skip')" class="btn-festive !bg-gray-700 !text-gray-200 !border-gray-500">過</button>
         </div>
-
-        <!-- 吃牌選擇群 (獨立顯示) -->
-        <div id="chi-select-btns" class="flex flex-wrap justify-center gap-4 hidden pointer-events-auto transform scale-90 md:scale-100 max-w-[95vw]">
-            <!-- 動態生成選項 -->
-        </div>
+        <div id="chi-select-btns" class="flex flex-wrap justify-center gap-4 hidden pointer-events-auto transform scale-90 md:scale-100 max-w-[95vw]"></div>
     </div>
 
-    <!-- 訊息提示 -->
-    <div id="msg-box" class="pointer-events-none fixed top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-yellow-300 border-2 border-yellow-400 px-6 py-3 md:px-8 md:py-4 rounded-full font-black opacity-0 transition-all shadow-2xl scale-110 z-50 whitespace-nowrap text-sm md:text-base">
-        <!-- 訊息顯示處 -->
-    </div>
+    <div id="msg-box" class="pointer-events-none fixed top-[20%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-red-600 text-yellow-300 border-2 border-yellow-400 px-6 py-3 rounded-full font-black opacity-0 transition-all shadow-2xl scale-110 z-50 whitespace-nowrap text-sm md:text-base"></div>
 
-    <!-- 右下角控制區 -->
     <div id="controls-area" class="absolute bottom-20 right-4 md:bottom-6 md:right-6 flex flex-col items-end z-20 gap-2">
-        <button id="cam-toggle-btn" class="ctrl-btn active" onclick="game.toggleAutoCamera()" title="自動跟隨視角">
-            📹
-        </button>
-        <button id="reset-cam-btn" class="ctrl-btn" onclick="game.resetCameraToCurrentPlayer()" title="重置視角">
-            ↺
-        </button>
+        <button id="cam-toggle-btn" class="ctrl-btn active" onclick="game.toggleAutoCamera()" title="自動跟隨視角">📹</button>
+        <button id="reset-cam-btn" class="ctrl-btn" onclick="game.resetCameraToCurrentPlayer()" title="重置視角">↺</button>
     </div>
 
-    <!-- 底部控制區 -->
-    <div class="flex flex-col gap-2 md:gap-4 interactive pb-4 md:pb-8 pointer-events-none items-center w-full">
-        <div id="turn-indicator" class="pointer-events-auto text-center text-yellow-400 text-lg md:text-xl font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-widest bg-black/40 py-2 rounded-lg px-6 backdrop-blur-sm mb-1">
+    <!-- 底部控制 -->
+    <div class="flex flex-col gap-2 md:gap-4 interactive pb-4 md:pb-8 pointer-events-none items-center w-full relative">
+        <!-- 聽牌提示容器 (會動態插入到這裡) -->
+        <div id="turn-indicator" class="pointer-events-auto text-center text-yellow-400 text-lg md:text-xl font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-widest bg-black/40 py-2 rounded-lg px-6 backdrop-blur-sm mb-1 relative">
             等待吉時開局...
         </div>
-        <div id="hint-text" class="text-center text-yellow-500/80 text-xs md:text-sm font-bold drop-shadow-md tutorial-hint pointer-events-none">
-            (單指轉視角 • 點擊選牌 • 雙擊出牌/點特寫出牌)
+        <div id="hint-text" class="text-center text-yellow-500/80 text-xs md:text-sm font-bold drop-shadow-md tutorial-hint pointer-events-none">(單指轉視角 • 點擊選牌 • 雙擊出牌)</div>
+    </div>
+</div>
+
+<!-- 結算視窗 -->
+<div id="result-overlay" class="fixed inset-0 hidden items-center justify-center bg-black/90 z-[100] p-6">
+    <div class="max-w-sm w-full bg-red-950 border-4 border-yellow-500 rounded-3xl p-8 text-center text-white z-[101]">
+        <h2 class="text-4xl font-black text-yellow-400 mb-4" id="result-title">大吉大利！</h2>
+        <div class="text-xl mb-6 font-bold" id="result-winner"></div>
+        <div class="flex flex-wrap justify-center gap-1 text-3xl mb-6 p-4 rounded-xl bg-white/10" id="result-hand"></div>
+        <div class="text-2xl font-bold text-yellow-300 mb-8" id="result-coins"></div>
+        <div class="flex flex-col gap-3">
+            <button onclick="game.restartGame()" class="btn-festive w-full py-4 text-xl bg-green-600 border-green-400">再來一局</button>
+            <button onclick="game.showMenu()" class="btn-festive w-full py-3 text-lg bg-gray-600 border-gray-400">更換模式</button>
         </div>
     </div>
 </div>
 
-<!-- 選單圖層 -->
+<!-- 主選單 -->
 <div id="menu-overlay" class="fixed inset-0 bg-[#4a0404]/95 flex items-center justify-center z-50 p-4 md:p-6 text-white text-center backdrop-blur-md">
     <div class="max-w-md w-full border-4 border-[#d4af37] p-6 md:p-8 rounded-3xl bg-[#5a0505] shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col gap-4 md:gap-6">
-        <div>
-            <h1 class="text-4xl md:text-5xl font-black mb-2 gold-text italic">恭喜發財</h1>
-            <h2 class="text-xl md:text-2xl font-bold text-yellow-100">台日雙制立體麻將</h2>
-        </div>
-        
+        <div><h1 class="text-4xl md:text-5xl font-black mb-2 gold-text italic">恭喜發財</h1><h2 class="text-xl md:text-2xl font-bold text-yellow-100">台日雙制立體麻將</h2></div>
         <div>
             <p class="mb-2 md:mb-3 text-yellow-500/80 font-medium uppercase tracking-widest text-xs">選擇新春規則</p>
             <div class="flex gap-4 justify-center">
-                <button id="rule-jp" onclick="selectRule('JP')" class="flex-1 py-3 rounded-xl border-2 border-white/20 bg-white/5 transition-all font-bold text-sm md:text-base">日本麻將</button>
-                <button id="rule-tw" onclick="selectRule('TW')" class="flex-1 py-3 rounded-xl border-2 border-white/20 bg-white/5 transition-all font-bold text-sm md:text-base">臺灣麻將</button>
+                <button id="rule-jp" onclick="selectRule('JP')" class="flex-1 py-3 rounded-xl border-2 border-white/20 bg-white/10 font-bold">日本麻將</button>
+                <button id="rule-tw" onclick="selectRule('TW')" class="flex-1 py-3 rounded-xl border-2 border-white/20 bg-white/10 font-bold">臺灣麻將</button>
             </div>
         </div>
-
         <div class="text-left">
             <p class="mb-2 md:mb-3 text-yellow-500/80 font-medium uppercase tracking-widest text-xs text-center">招牌遊玩模式</p>
             <select id="player-mode" class="w-full p-3 md:p-4 bg-red-900/50 rounded-xl border border-yellow-600/50 text-base md:text-lg appearance-none text-center font-bold text-yellow-100 focus:outline-none focus:border-yellow-400 transition-colors">
@@ -257,1273 +196,256 @@
                 <option value="2h2c">2 位玩家 + 2 位電腦</option>
             </select>
         </div>
-
-        <button onclick="startGame()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white py-4 md:py-5 rounded-2xl font-black text-2xl md:text-3xl shadow-[0_0_40px_rgba(212,175,55,0.4)] border-b-8 border-red-900 active:border-b-0 active:translate-y-2 transition-all">
-            開 局 贏 紅 包 <span class="text-sm block font-normal text-yellow-300 mt-1">(費用: 100 代幣)</span>
-        </button>
+        <button onclick="startGame()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white py-4 md:py-5 rounded-2xl font-black text-2xl md:text-3xl shadow-[0_0_40px_rgba(212,175,55,0.4)] border-b-8 border-red-900 active:border-b-0 active:translate-y-2 transition-all">開 局 贏 紅 包 <span class="text-sm block font-normal text-yellow-300 mt-1">(費用: 100 代幣)</span></button>
         <p class="text-xs text-yellow-600">※ 音樂將於開局後自動播放 ※</p>
         <p class="text-[10px] text-yellow-600/80 mt-1">Audio Source: Music by 胤樂音樂</p>
     </div>
 </div>
 
-<div id="result-overlay" class="fixed inset-0 hidden items-center justify-center bg-black/90 z-[100] p-6">
-    <div class="max-w-sm w-full bg-red-950 border-4 border-yellow-500 rounded-3xl p-8 text-center text-white z-[101]">
-        <h2 class="text-4xl font-black text-yellow-400 mb-4" id="result-title">大吉大利！</h2>
-        <div class="text-xl mb-6" id="result-winner"></div>
-        <div class="flex flex-wrap justify-center gap-1 text-3xl mb-6 p-4 rounded-xl bg-white/10" id="result-hand"></div>
-        <div class="text-2xl font-bold text-yellow-300 mb-8" id="result-coins"></div>
-        <button onclick="location.reload()" class="btn-festive w-full py-4 text-xl">再開一局</button>
-    </div>
-</div>
-
 <script>
-/**
- * 麻將數據定義
- */
-const TILE_EMOJI = {
-    'M1':'🀇','M2':'🀈','M3':'🀉','M4':'🀊','M5':'🀋','M6':'🀌','M7':'🀍','M8':'🀎','M9':'🀏',
-    'P1':'🀙','P2':'🀚','P3':'🀛','P4':'🀜','P5':'🀝','P6':'🀞','P7':'🀟','P8':'🀠','P9':'🀡',
-    'S1':'🀐','S2':'🀑','S3':'🀒','S4':'🀓','S5':'🀔','S6':'🀕','S7':'🀖','S8':'🀗','S9':'🀘',
-    'Z1':'🀀','Z2':'🀁','Z3':'🀂','Z4':'🀃','Z5':'🀆','Z6':'🀅','Z7':'🀄',
-    'F1':'🌸','F2':'🌿','F3':'🎋','F4':'🌼','F5':'☀️','F6':'🌬️','F7':'🍂','F8':'❄️'
-};
-
-/* 慶祝特效類別 */
-class Celebration {
-    constructor() {
-        this.canvas = document.getElementById('celebration-canvas');
-        this.ctx = this.canvas.getContext('2d');
-        this.particles = [];
-        this.active = false;
-        this.resize();
-        window.addEventListener('resize', () => this.resize());
-    }
-
-    resize() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
-    }
-
-    start(duration = 12000) {
-        this.active = true;
-        this.particles = [];
-        this.startTime = Date.now();
-        this.duration = duration;
-        this.animate();
-        // 初始爆發
-        for(let i=0; i<5; i++) this.launchFirework();
-        // 持續發射
-        this.interval = setInterval(() => {
-            if(this.active) this.launchFirework();
-        }, 500);
-        // 紙花
-        this.confettiInterval = setInterval(() => {
-            if(this.active) this.addConfetti();
-        }, 100);
-
-        setTimeout(() => this.stop(), duration);
-    }
-
-    stop() {
-        this.active = false;
-        clearInterval(this.interval);
-        clearInterval(this.confettiInterval);
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-
-    launchFirework() {
-        const x = Math.random() * this.canvas.width;
-        const y = Math.random() * (this.canvas.height * 0.5);
-        const color = `hsl(${Math.random() * 360}, 100%, 50%)`;
-        for (let i = 0; i < 50; i++) {
-            this.particles.push({
-                x: x, y: y,
-                vx: (Math.random() - 0.5) * 10,
-                vy: (Math.random() - 0.5) * 10,
-                alpha: 1, color: color,
-                type: 'firework'
-            });
-        }
-    }
-
-    addConfetti() {
-        for(let i=0; i<5; i++) {
-            this.particles.push({
-                x: Math.random() * this.canvas.width,
-                y: -10,
-                vx: (Math.random() - 0.5) * 2,
-                vy: Math.random() * 3 + 2,
-                color: `hsl(${Math.random() * 360}, 100%, 50%)`,
-                rotation: Math.random() * 360,
-                vRot: (Math.random() - 0.5) * 10,
-                type: 'confetti'
-            });
-        }
-    }
-
-    animate() {
-        if (!this.active && this.particles.length === 0) return;
-        requestAnimationFrame(() => this.animate());
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // Clear but allow trails if wanted
-
-        for (let i = this.particles.length - 1; i >= 0; i--) {
-            const p = this.particles[i];
-            
-            if (p.type === 'firework') {
-                p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.alpha -= 0.01;
-                this.ctx.globalAlpha = p.alpha;
-                this.ctx.fillStyle = p.color;
-                this.ctx.beginPath(); this.ctx.arc(p.x, p.y, 3, 0, Math.PI * 2); this.ctx.fill();
-                if (p.alpha <= 0) this.particles.splice(i, 1);
-            } else {
-                p.x += p.vx; p.y += p.vy; p.rotation += p.vRot;
-                this.ctx.globalAlpha = 1;
-                this.ctx.fillStyle = p.color;
-                this.ctx.save();
-                this.ctx.translate(p.x, p.y);
-                this.ctx.rotate(p.rotation * Math.PI / 180);
-                this.ctx.fillRect(-5, -3, 10, 6);
-                this.ctx.restore();
-                if (p.y > this.canvas.height) this.particles.splice(i, 1);
-            }
-        }
-    }
-}
+const TILE_EMOJI={'M1':'🀇','M2':'🀈','M3':'🀉','M4':'🀊','M5':'🀋','M6':'🀌','M7':'🀍','M8':'🀎','M9':'🀏','P1':'🀙','P2':'🀚','P3':'🀛','P4':'🀜','P5':'🀝','P6':'🀞','P7':'🀟','P8':'🀠','P9':'🀡','S1':'🀐','S2':'🀑','S3':'🀒','S4':'🀓','S5':'🀔','S6':'🀕','S7':'🀖','S8':'🀗','S9':'🀘','Z1':'🀀','Z2':'🀁','Z3':'🀂','Z4':'🀃','Z5':'🀆','Z6':'🀅','Z7':'🀄','F1':'🌸','F2':'🌿','F3':'🎋','F4':'🌼','F5':'☀️','F6':'🌬️','F7':'🍂','F8':'❄️'};
+class Celebration{constructor(){this.canvas=document.getElementById('celebration-canvas');this.ctx=this.canvas.getContext('2d');this.particles=[];this.active=false;this.resize();window.addEventListener('resize',()=>this.resize());}resize(){this.canvas.width=window.innerWidth;this.canvas.height=window.innerHeight;}start(d=12000){this.active=true;this.particles=[];this.animate();for(let i=0;i<5;i++)this.fire();this.int=setInterval(()=>{if(this.active)this.fire()},500);this.conf=setInterval(()=>{if(this.active)this.addConf()},100);setTimeout(()=>this.stop(),d);}stop(){this.active=false;clearInterval(this.int);clearInterval(this.conf);this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);}fire(){const x=Math.random()*this.canvas.width,y=Math.random()*(this.canvas.height*0.5),c=`hsl(${Math.random()*360},100%,50%)`;for(let i=0;i<50;i++)this.particles.push({x,y,vx:(Math.random()-0.5)*10,vy:(Math.random()-0.5)*10,a:1,c,t:'f'});}addConf(){for(let i=0;i<5;i++)this.particles.push({x:Math.random()*this.canvas.width,y:-10,vx:(Math.random()-0.5)*2,vy:Math.random()*3+2,c:`hsl(${Math.random()*360},100%,50%)`,r:Math.random()*360,vr:(Math.random()-0.5)*10,t:'c'});}animate(){if(!this.active&&!this.particles.length)return;requestAnimationFrame(()=>this.animate());this.ctx.clearRect(0,0,this.canvas.width,this.canvas.height);for(let i=this.particles.length-1;i>=0;i--){const p=this.particles[i];if(p.t==='f'){p.x+=p.vx;p.y+=p.vy;p.vy+=0.05;p.a-=0.01;this.ctx.globalAlpha=p.a;this.ctx.fillStyle=p.c;this.ctx.beginPath();this.ctx.arc(p.x,p.y,3,0,Math.PI*2);this.ctx.fill();if(p.a<=0)this.particles.splice(i,1);}else{p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;this.ctx.globalAlpha=1;this.ctx.fillStyle=p.c;this.ctx.save();this.ctx.translate(p.x,p.y);this.ctx.rotate(p.r*Math.PI/180);this.ctx.fillRect(-5,-3,10,6);this.ctx.restore();if(p.y>this.canvas.height)this.particles.splice(i,1);}}}}
 
 class MahjongGame {
     constructor() {
-        this.scene = null;
-        this.camera = null;
-        this.renderer = null;
-        this.controls = null;
-        this.rule = 'TW';
-        this.playerModes = '3h1c';
-        this.hands = [[], [], [], []];
-        this.melds = [[], [], [], []]; 
-        this.discards = [[], [], [], []]; 
-        this.flowers = [[], [], [], []]; 
-        this.wall = [];
-        this.turn = 0;
-        this.scores = [0,0,0,0];
-        this.credits = 10000; // 初始代幣
-        this.tilesObjects = [];
-        this.raycaster = new THREE.Raycaster();
-        this.mouse = new THREE.Vector2();
-        this.selectedTile = null; 
-        this.labelsGroup = new THREE.Group();
-        this.pointerDownTime = 0;
-        this.pointerDownPos = new THREE.Vector2();
-        
-        this.isInitialized = false;
-        this.isGameActive = false;
-        this.autoDiscardTimeout = null;
-        this.waitingForAction = false;
-        this.currentActionContext = null; 
-
-        this.autoCamera = true;
-        this.baseCameraPositions = [
-            { pos: new THREE.Vector3(0, 24, 18), target: new THREE.Vector3(0, -3, 2) },    // P0
-            { pos: new THREE.Vector3(18, 24, 0), target: new THREE.Vector3(2, -3, 0) },    // P1
-            { pos: new THREE.Vector3(0, 24, -18), target: new THREE.Vector3(0, -3, -2) },  // P2
-            { pos: new THREE.Vector3(-18, 24, 0), target: new THREE.Vector3(-2, -3, 0) }   // P3
-        ];
-
-        this.celebration = new Celebration();
+        this.scene=null;this.camera=null;this.renderer=null;this.controls=null;
+        this.mahjongGroup=new THREE.Group();this.labelsGroup=new THREE.Group();
+        this.rule='TW';this.playerModes='3h1c';
+        this.hands=[[],[],[],[]];this.melds=[[],[],[],[]];this.discards=[[],[],[],[]];this.flowers=[[],[],[],[]];
+        this.wall=[];this.turn=0;this.credits=10000;
+        this.isGameActive=false;this.waitingForAction=false;this.autoCamera=true;this.selectedTile=null;
+        this.camConfigs=[{pos:new THREE.Vector3(0,24,18),target:new THREE.Vector3(0,-3,2)},{pos:new THREE.Vector3(18,24,0),target:new THREE.Vector3(2,-3,0)},{pos:new THREE.Vector3(0,24,-18),target:new THREE.Vector3(0,-3,-2)},{pos:new THREE.Vector3(-18,24,0),target:new THREE.Vector3(-2,-3,0)}];
+        this.celebration=new Celebration();
     }
-
-    init() {
-        if (this.isInitialized) return;
-
-        const container = document.getElementById('game-container');
-        this.scene = new THREE.Scene();
-        this.scene.background = new THREE.Color(0x2d0a0a);
-
-        this.camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        
-        this.renderer = new THREE.WebGLRenderer({ antialias: true });
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.renderer.shadowMap.enabled = true;
-        container.appendChild(this.renderer.domElement);
-
-        this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
-        this.controls.enableDamping = true;
-        this.controls.dampingFactor = 0.05;
-        this.controls.maxPolarAngle = Math.PI / 2.1;
-        this.controls.minDistance = 10;
-        this.controls.maxDistance = 80;
-
-        const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-        this.scene.add(ambientLight);
-        const spotLight = new THREE.SpotLight(0xffffff, 0.6);
-        spotLight.position.set(0, 40, 0);
-        spotLight.castShadow = true;
-        this.scene.add(spotLight);
-
-        const tableGeo = new THREE.BoxGeometry(24, 1, 24); 
-        const tableMat = new THREE.MeshPhongMaterial({ color: 0x8b0000 });
-        const table = new THREE.Mesh(tableGeo, tableMat);
-        table.position.y = -1;
-        table.receiveShadow = true;
-        this.scene.add(table);
-
-        const frameGeo = new THREE.BoxGeometry(25, 0.8, 25);
-        const frameMat = new THREE.MeshPhongMaterial({ color: 0xd4af37 });
-        const frame = new THREE.Mesh(frameGeo, frameMat);
-        frame.position.y = -1.1;
-        this.scene.add(frame);
-        
-        this.scene.add(this.labelsGroup);
-
-        window.addEventListener('resize', () => this.onResize());
-        container.addEventListener('pointerdown', (e) => this.onPointerDown(e));
-        container.addEventListener('pointerup', (e) => this.onPointerUp(e));
-
-        this.resetCameraToCurrentPlayer(); 
-        this.animate();
-        this.isInitialized = true;
-        this.updateCreditUI();
+    init(){
+        if(this.isInitialized)return;
+        const c=document.getElementById('game-container');
+        this.scene=new THREE.Scene();this.scene.background=new THREE.Color(0x1a0505);
+        this.camera=new THREE.PerspectiveCamera(40,window.innerWidth/window.innerHeight,0.1,1000);
+        this.renderer=new THREE.WebGLRenderer({antialias:true,logarithmicDepthBuffer:true});
+        this.renderer.setSize(window.innerWidth,window.innerHeight);this.renderer.shadowMap.enabled=true;c.appendChild(this.renderer.domElement);
+        this.controls=new THREE.OrbitControls(this.camera,this.renderer.domElement);
+        this.controls.enableDamping=true;this.scene.add(new THREE.AmbientLight(0xffffff,0.9));
+        const sun=new THREE.DirectionalLight(0xffffff,0.5);sun.position.set(5,20,10);this.scene.add(sun);
+        const t=new THREE.Mesh(new THREE.BoxGeometry(24,1,24),new THREE.MeshPhongMaterial({color:0x8b0000}));t.position.y=-1;this.scene.add(t);
+        const f=new THREE.Mesh(new THREE.BoxGeometry(25,0.8,25),new THREE.MeshPhongMaterial({color:0xd4af37}));f.position.y=-1.1;this.scene.add(f);
+        this.scene.add(this.mahjongGroup);this.scene.add(this.labelsGroup);
+        window.addEventListener('resize',()=>this.onResize());
+        this.renderer.domElement.addEventListener('pointerup',(e)=>this.handleTap(e.clientX,e.clientY));
+        this.animate();this.isInitialized=true;this.updateCreditUI();
     }
-
-    getResponsiveCameraPosition(basePos) {
-        const aspect = window.innerWidth / window.innerHeight;
-        const newPos = basePos.clone();
+    onResize(){this.camera.aspect=window.innerWidth/window.innerHeight;this.camera.updateProjectionMatrix();this.renderer.setSize(window.innerWidth,window.innerHeight);this.celebration.resize();}
+    toggleAutoCamera(){this.autoCamera=!this.autoCamera;document.getElementById('cam-toggle-btn').classList.toggle('active',this.autoCamera);if(this.autoCamera)this.resetCamera();}
+    resetCamera(){const c=this.camConfigs[this.turn%4],p=c.pos.clone();if(window.innerWidth<window.innerHeight)p.multiplyScalar(1.5);new TWEEN.Tween(this.camera.position).to(p,800).easing(TWEEN.Easing.Quadratic.Out).start();new TWEEN.Tween(this.controls.target).to(c.target,800).easing(TWEEN.Easing.Quadratic.Out).start();}
+    isComputer(p){return this.playerModes==='1h3c'?p!==0:(this.playerModes==='3h1c'?p===3:(this.playerModes==='2h2c'?p>=2:false));}
+    
+    setupGame(r,m){
+        if(this.credits<100){alert("代幣不足！");this.showMenu();return;}
+        this.updateCredits(-100); this.isGameActive=true;this.rule=r;this.playerModes=m;
+        this.wall=[]; this.turn=0; this.waitingForAction=false;
+        this.hands=[[],[],[],[]];this.melds=[[],[],[],[]];this.discards=[[],[],[],[]];this.flowers=[[],[],[],[]];
         
-        if (aspect < 1) {
-            const zoomFactor = 1.0 + (1.0 - aspect) * 1.5; 
-            newPos.multiplyScalar(zoomFactor);
-            if (newPos.y > 60) newPos.setLength(60);
+        let deck=[]; ['M','P','S'].forEach(s=>{for(let i=1;i<=9;i++)for(let k=0;k<4;k++)deck.push(s+i);});
+        for(let i=1;i<=7;i++)for(let k=0;k<4;k++)deck.push('Z'+i);
+        if(r==='TW')for(let i=1;i<=8;i++)deck.push('F'+i);
+        // 洗牌 (確保不重複)
+        for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}
+        this.wall=[...deck];
+
+        const hs=r==='JP'?13:16;
+        for(let p=0;p<4;p++) this.hands[p]=this.wall.splice(0,hs);
+        if(r==='TW') this.handleFlower();
+        for(let p=0;p<4;p++) this.hands[p].sort();
+
+        this.controls.enableRotate=true;
+        if(m==='1h3c'){this.controls.minAzimuthAngle=-Math.PI/4;this.controls.maxAzimuthAngle=Math.PI/4;document.getElementById('controls-area').classList.add('hidden-ctrl');}
+        else{this.controls.minAzimuthAngle=-Infinity;this.controls.maxAzimuthAngle=Infinity;document.getElementById('controls-area').classList.remove('hidden-ctrl');}
+        this.createLabels();this.renderTiles();this.resetCamera();this.nextTurn();
+    }
+    
+    handleFlower(){
+        let chg=true;
+        while(chg){chg=false;for(let p=0;p<4;p++){for(let i=this.hands[p].length-1;i>=0;i--){if(this.hands[p][i].startsWith('F')){this.flowers[p].push(this.hands[p].splice(i,1)[0]);if(this.wall.length)this.hands[p].push(this.wall.pop());chg=true;}}}}
+    }
+    
+    // 檢查聽牌
+    checkTenpai(hand, melds) {
+        // 簡單邏輯：嘗試加入每一張可能的牌，看是否胡牌
+        const testHand = [...hand];
+        const suits = ['M','P','S','Z'];
+        for(let s of suits) {
+            const limit = s === 'Z' ? 7 : 9;
+            for(let i=1; i<=limit; i++) {
+                const tile = s + i;
+                // 檢查是否能胡
+                if (this.checkWin([...testHand, tile])) return true;
+            }
         }
-        return newPos;
+        return false;
     }
 
-    resetCameraToCurrentPlayer() {
-        const currentId = this.turn % 4;
-        const baseConfig = this.baseCameraPositions[currentId];
-        const targetPos = this.getResponsiveCameraPosition(baseConfig.pos);
-        
-        new TWEEN.Tween(this.camera.position)
-            .to(targetPos, 1000)
-            .easing(TWEEN.Easing.Cubic.Out)
-            .start();
+    renderTiles(){
+        this.mahjongGroup.clear(); if(this.selectedTile){this.hidePreview();this.selectedTile=null;}
+        const tW=0.85,tH=1.25,tD=0.55, hSize=this.rule==='JP'?13:16;
+        for(let p=0;p<4;p++){
+            const hand=this.hands[p], hasDraw=hand.length>hSize+(this.melds[p].length*3)%3;
+            const off=((hasDraw?hand.length-1:hand.length)*tW)/2;
             
-        new TWEEN.Tween(this.controls.target)
-            .to(baseConfig.target, 1000)
-            .easing(TWEEN.Easing.Cubic.Out)
-            .start();
-    }
+            // 聽牌檢查 (只對真人顯示)
+            if(!this.isComputer(p) && this.checkTenpai(hand)) {
+                 // 顯示聽牌標籤，但要避免重複
+                 // 這裡我們直接在UI層做一個浮動標籤
+                 if(this.turn%4 === p) {
+                    const existing = document.getElementById('tenpai-alert');
+                    if(!existing) {
+                        const alert = document.createElement('div');
+                        alert.id = 'tenpai-alert';
+                        alert.className = 'tenpai-alert';
+                        alert.innerText = '🔥 聽牌中！';
+                        document.getElementById('turn-indicator').appendChild(alert);
+                    }
+                 }
+            } else {
+                const existing = document.getElementById('tenpai-alert');
+                if(existing) existing.remove();
+            }
 
-    toggleAutoCamera() {
-        this.autoCamera = !this.autoCamera;
-        const btn = document.getElementById('cam-toggle-btn');
-        if(this.autoCamera) {
-            btn.classList.add('active');
-            this.resetCameraToCurrentPlayer();
-        } else {
-            btn.classList.remove('active');
+            hand.forEach((c,i)=>{
+                const t=this.createTile(tW,tH,tD); let x=0,z=0,r=0,ip=(i*tW*1.02)-off;
+                if(hasDraw&&i===hand.length-1) ip+=0.4;
+                if(p===0){x=ip;z=9.5;r=0;}else if(p===1){x=9.5;z=ip;r=Math.PI/2;}else if(p===2){x=-ip;z=-9.5;r=Math.PI;}else if(p===3){x=-9.5;z=-ip;r=-Math.PI/2;}
+                if(!this.isComputer(p)) this.addLabel(t,TILE_EMOJI[c],c);
+                t.position.set(x,tH/2,z); t.rotation.y=r; t.userData={o:p,idx:i,c:c,t:'h'}; this.mahjongGroup.add(t);
+            });
+            let mSt=(hand.length*tW*1.02)/2+0.8;
+            this.melds[p].forEach((m,mi)=>{m.forEach((c,ti)=>{const t=this.createTile(tW,tH,tD);this.addLabel(t,TILE_EMOJI[c],c);let x=0,z=0,r=0,mp=mSt+(mi*3+ti)*tW;if(p===0){x=mp;z=9.5;r=0;}else if(p===1){x=9.5;z=mp;r=Math.PI/2;}else if(p===2){x=-mp;z=-9.5;r=Math.PI;}else if(p===3){x=-9.5;z=-mp;r=-Math.PI/2;}t.position.set(x,tD/2,z);t.rotation.set(-Math.PI/2,0,r+Math.PI);this.mahjongGroup.add(t);});});
+            [...this.flowers[p],...this.discards[p]].forEach((c,i)=>{const t=this.createTile(tW,tH,tD);this.addLabel(t,TILE_EMOJI[c],c);let x=0,z=0,r=0,rw=Math.floor(i/6),cl=i%6;if(p===0){x=(cl-2.5)*tW;z=2.5+rw*tH;r=0;}else if(p===1){x=2.5+rw*tH;z=(cl-2.5)*tW;r=-Math.PI/2;}else if(p===2){x=-(cl-2.5)*tW;z=-(2.5+rw*tH);r=Math.PI;}else if(p===3){x=-(2.5+rw*tH);z=-(cl-2.5)*tW;r=Math.PI/2;}t.position.set(x,tD/2,z);t.rotation.set(-Math.PI/2,0,r+Math.PI);this.mahjongGroup.add(t);});
         }
     }
-
-    onResize() {
-        this.camera.aspect = window.innerWidth / window.innerHeight;
-        this.camera.updateProjectionMatrix();
-        this.renderer.setSize(window.innerWidth, window.innerHeight);
-        this.celebration.resize();
-    }
-
-    isComputer(playerId) {
-        const m = this.playerModes;
-        if (m === '1h3c') return playerId !== 0;
-        if (m === '3h1c') return playerId === 3;
-        if (m === '2h2c') return playerId >= 2;
-        if (m === '4h') return false;
-        return true;
-    }
-
-    setupGame(rule, mode) {
-        if (this.credits < 100) {
-            alert("代幣不足！請重新整理頁面以重置代幣。");
-            game.endGame();
-            return;
-        }
-        this.updateCredits(-100); // 扣除開局費
-
-        this.isGameActive = true;
-        this.rule = rule;
-        this.playerModes = mode;
-        this.scores = rule === 'JP' ? [25000, 25000, 25000, 25000] : [1000, 1000, 1000, 1000];
-        this.wall = [];
-        this.turn = 0; 
-        this.waitingForAction = false;
-        
-        ['M','P','S'].forEach(suit => {
-            for(let i=1; i<=9; i++) for(let k=0; k<4; k++) this.wall.push(suit + i);
-        });
-        for(let i=1; i<=7; i++) for(let k=0; k<4; k++) this.wall.push('Z' + i);
-        if(rule === 'TW') {
-            for(let i=1; i<=8; i++) this.wall.push('F' + i);
-        }
-        
-        for(let i = this.wall.length - 1; i > 0; i--) {
-            const seed = (Date.now() % 100) / 100; 
-            const j = Math.floor((Math.random() + seed) % 1 * (i + 1));
-            [this.wall[i], this.wall[j]] = [this.wall[j], this.wall[i]];
-        }
-
-        const handSize = rule === 'JP' ? 13 : 16;
-        for(let p=0; p<4; p++) {
-            this.hands[p] = this.wall.splice(0, handSize);
-            this.flowers[p] = [];
-            this.discards[p] = [];
-            this.melds[p] = [];
-        }
-
-        if (rule === 'TW') {
-            this.handleFlowerReplacement();
-        }
-
-        for(let p=0; p<4; p++) {
-            this.hands[p].sort();
-        }
-
-        this.controls.enableRotate = true; 
-        if (mode === '1h3c') {
-            this.controls.minAzimuthAngle = -Math.PI / 4; 
-            this.controls.maxAzimuthAngle = Math.PI / 4;  
-            document.getElementById('controls-area').classList.add('hidden-ctrl');
-            document.getElementById('hint-text').innerText = "(單指微調視角 • 點擊選牌 • 雙擊出牌/點特寫)";
-        } else {
-            this.controls.minAzimuthAngle = -Infinity;
-            this.controls.maxAzimuthAngle = Infinity;
-            document.getElementById('controls-area').classList.remove('hidden-ctrl');
-            document.getElementById('hint-text').innerText = "(單指轉視角 • 點擊選牌 • 雙擊出牌/點特寫)";
-        }
-
-        this.createPlayerLabels();
+    createTile(w,h,d){return new THREE.Mesh(new THREE.BoxGeometry(w,h,d),[new THREE.MeshPhongMaterial({color:0x228b22}),new THREE.MeshPhongMaterial({color:0x228b22}),new THREE.MeshPhongMaterial({color:0x228b22}),new THREE.MeshPhongMaterial({color:0x228b22}),new THREE.MeshPhongMaterial({color:0xffffff}),new THREE.MeshPhongMaterial({color:0x004d00})]);}
+    addLabel(m,txt,c){const cvs=document.createElement('canvas');cvs.width=256;cvs.height=256;const ctx=cvs.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,256,256);ctx.fillStyle=(c.match(/^[M]|Z7/)||c.startsWith('F'))?'#c00':(c==='Z6'?'#080':'#000');ctx.font='bold 180px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(txt,128,128);const l=new THREE.Mesh(new THREE.PlaneGeometry(0.8,1.2),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cvs),transparent:true,polygonOffset:true,polygonOffsetFactor:-2}));l.position.z=0.285;m.add(l);}
+    createLabels(){this.labelsGroup.clear();[{x:0,z:12.5,r:0},{x:12.5,z:0,r:Math.PI/2},{x:0,z:-12.5,r:Math.PI},{x:-12.5,z:0,r:-Math.PI/2}].forEach((p,i)=>{const cvs=document.createElement('canvas');cvs.width=256;cvs.height=64;const ctx=cvs.getContext('2d');ctx.fillStyle=this.isComputer(i)?'#444':'#c00';ctx.fillRect(0,0,256,64);ctx.fillStyle='#fff';ctx.font='bold 36px sans-serif';ctx.textAlign='center';ctx.fillText((this.isComputer(i)?'電腦 ':'玩家 ')+(i+1),128,45);const m=new THREE.Mesh(new THREE.PlaneGeometry(5,1.2),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(cvs),transparent:true}));m.position.set(p.x,0.1,p.z);m.rotation.set(-Math.PI/2,0,p.r);this.labelsGroup.add(m);});}
+    
+    nextTurn(){
+        if(!this.isGameActive||this.waitingForAction)return;
+        const p=this.turn%4, isC=this.isComputer(p);
+        document.getElementById('turn-indicator').innerText=`🧧 輪到 ${isC?`電腦 ${p}`:`玩家 ${p+1}`} 了`;
+        if(this.autoCamera)this.resetCamera();
         this.updateUI();
-        this.renderTiles();
-        
-        this.turn = 0; 
-        this.resetCameraToCurrentPlayer(); 
-        this.nextTurn();
-        this.surpriseEffect("🧧 祝你開張大吉！");
-    }
-
-    updateCredits(amount) {
-        this.credits += amount;
-        this.updateCreditUI();
-        
-        if (amount < 0) {
-            // 顯示扣款動畫
-            const el = document.createElement('div');
-            el.innerText = amount;
-            el.className = 'deduct-anim';
-            el.style.left = '80px';
-            el.style.top = '10px';
-            document.getElementById('game-info').appendChild(el);
-            setTimeout(() => el.remove(), 1000);
-        }
-    }
-
-    updateCreditUI() {
-        document.getElementById('credit-count').innerText = this.credits;
-    }
-
-    handleFlowerReplacement() {
-        let hasFlower = true;
-        while(hasFlower) {
-            hasFlower = false;
-            for(let p=0; p<4; p++) {
-                const flowerIndices = [];
-                this.hands[p].forEach((code, idx) => {
-                    if(code.startsWith('F')) flowerIndices.push(idx);
-                });
-
-                if (flowerIndices.length > 0) {
-                    hasFlower = true;
-                    flowerIndices.sort((a,b) => b-a);
-                    
-                    flowerIndices.forEach(idx => {
-                        const fTile = this.hands[p].splice(idx, 1)[0];
-                        this.flowers[p].push(fTile); 
-                        if(this.wall.length > 0) {
-                            const newTile = this.wall.pop();
-                            this.hands[p].push(newTile);
-                        }
-                    });
-                }
-            }
-        }
-    }
-
-    endGame() {
-        this.isGameActive = false;
-        if (this.autoDiscardTimeout) {
-            clearTimeout(this.autoDiscardTimeout);
-            this.autoDiscardTimeout = null;
-        }
-        document.getElementById('menu-overlay').style.display = 'flex';
-        this.tilesObjects.forEach(obj => this.scene.remove(obj));
-        this.tilesObjects = [];
-    }
-
-    createPlayerLabels() {
-        while(this.labelsGroup.children.length > 0) this.labelsGroup.remove(this.labelsGroup.children[0]); 
-
-        const positions = [
-            { x: 0, z: 13, ry: 0 },          
-            { x: 13, z: 0, ry: Math.PI/2 }, 
-            { x: 0, z: -13, ry: Math.PI },  
-            { x: -13, z: 0, ry: -Math.PI/2 } 
-        ];
-
-        for(let i=0; i<4; i++) {
-            const isComp = this.isComputer(i);
-            const text = isComp ? `💻 電腦 ${i}` : `👤 玩家 ${i+1}`;
-            
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            canvas.width = 256; canvas.height = 64;
-            
-            ctx.fillStyle = isComp ? 'rgba(50, 50, 50, 0.9)' : 'rgba(200, 0, 0, 0.9)';
-            ctx.strokeStyle = '#d4af37';
-            ctx.lineWidth = 4;
-            ctx.beginPath(); ctx.roundRect(4, 4, 248, 56, 10); ctx.fill(); ctx.stroke();
-
-            ctx.fillStyle = '#fff'; ctx.font = 'bold 36px "Microsoft JhengHei"';
-            ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-            ctx.fillText(text, 128, 32);
-
-            const texture = new THREE.CanvasTexture(canvas);
-            const mat = new THREE.MeshBasicMaterial({ map: texture, transparent: true, side: THREE.DoubleSide });
-            const geo = new THREE.PlaneGeometry(5, 1.25);
-            const mesh = new THREE.Mesh(geo, mat);
-            
-            mesh.position.set(positions[i].x, 0.5, positions[i].z);
-            mesh.rotation.x = -Math.PI/2; 
-            mesh.rotation.z = positions[i].ry; 
-            this.labelsGroup.add(mesh);
-        }
-    }
-
-    renderTiles() {
-        this.tilesObjects.forEach(obj => this.scene.remove(obj));
-        this.tilesObjects = [];
-        if(this.selectedTile) { this.hidePreview(); this.selectedTile = null; }
-
-        const tW = 0.85, tH = 1.25, tD = 0.55;
-        const handSize = this.rule === 'JP' ? 13 : 16;
-
-        for(let p=0; p<4; p++) {
-            const hand = this.hands[p];
-            const hasDrawnTile = hand.length > handSize + (this.melds[p].length * 3) % 3; 
-            const baseLen = hasDrawnTile ? hand.length - 1 : hand.length;
-            const meldOffset = this.melds[p].length * (3 * tW * 1.02 + 0.2); 
-            const handOffset = (baseLen * tW) / 2;
-            
-            hand.forEach((tileCode, i) => {
-                const tile = this.createTileMesh(tW, tH, tD);
-                let x = 0, y = 0, z = 0, rotY = 0;
-                const dist = 9.5; 
-
-                let iPos = (i * tW * 1.02) - handOffset - (meldOffset/2); 
-                if (hasDrawnTile && i === hand.length - 1) {
-                    iPos += 0.4; // 摸牌間隔
-                }
-
-                if(p === 0) { x = iPos; z = dist; rotY = 0; }
-                else if(p === 1) { x = dist; z = iPos; rotY = Math.PI/2; } 
-                else if(p === 2) { x = -iPos; z = -dist; rotY = Math.PI; } 
-                else if(p === 3) { x = -dist; z = -iPos; rotY = -Math.PI/2; }
-
-                const isHuman = !this.isComputer(p);
-                if (isHuman) {
-                    this.addLabelToTile(tile, TILE_EMOJI[tileCode], tileCode);
-                }
-
-                tile.position.set(x, tH/2 + y, z);
-                tile.rotation.set(0, rotY, 0); 
-                
-                tile.userData = { index: i, owner: p, code: tileCode, type: 'hand' };
-                tile.castShadow = true;
-                this.scene.add(tile);
-                this.tilesObjects.push(tile);
-            });
-
-            let meldStartX = (hand.length * tW * 1.02) / 2 - (meldOffset/2) + 0.8; 
-            
-            this.melds[p].forEach((meldGroup, mIdx) => {
-                meldGroup.forEach((tileCode, tIdx) => {
-                    const tile = this.createTileMesh(tW, tH, tD);
-                    this.addLabelToTile(tile, TILE_EMOJI[tileCode], tileCode);
-                    
-                    let x=0, z=0, rotY=0;
-                    const dist = 9.5;
-                    const mPos = meldStartX + (mIdx * 3 + tIdx) * (tW * 1.02) + (mIdx * 0.2); 
-
-                    if(p === 0) { x = mPos; z = dist; rotY = 0; }
-                    else if(p === 1) { x = dist; z = mPos; rotY = Math.PI/2; } 
-                    else if(p === 2) { x = -mPos; z = -dist; rotY = Math.PI; } 
-                    else if(p === 3) { x = -dist; z = -mPos; rotY = -Math.PI/2; }
-
-                    tile.position.set(x, tD/2, z); 
-                    tile.rotation.set(-Math.PI/2, 0, rotY + Math.PI); 
-                    this.scene.add(tile);
-                });
-            });
-        }
-
-        for(let p=0; p<4; p++) {
-            const riverTiles = [...this.flowers[p], ...this.discards[p]];
-            const rowSize = 6;
-            
-            riverTiles.forEach((tileCode, i) => {
-                const tile = this.createTileMesh(tW, tH, tD);
-                this.addLabelToTile(tile, TILE_EMOJI[tileCode], tileCode);
-
-                let x = 0, z = 0, rotY = 0;
-                const row = Math.floor(i / rowSize);
-                const col = i % rowSize;
-                const startDist = 2.5;
-                const tileGap = tW * 1.0;
-                const rowGap = tH * 0.9;
-
-                if (p === 0) { x = (col - rowSize/2 + 0.5) * tileGap; z = startDist + row * rowGap; rotY = 0; }
-                else if (p === 1) { x = startDist + row * rowGap; z = (col - rowSize/2 + 0.5) * tileGap; rotY = -Math.PI/2; }
-                else if (p === 2) { x = -(col - rowSize/2 + 0.5) * tileGap; z = -(startDist + row * rowGap); rotY = Math.PI; }
-                else if (p === 3) { x = -(startDist + row * rowGap); z = -(col - rowSize/2 + 0.5) * tileGap; rotY = Math.PI/2; }
-
-                tile.position.set(x, tD/2, z);
-                tile.rotation.set(-Math.PI/2, 0, rotY + Math.PI);
-                tile.receiveShadow = true;
-                this.scene.add(tile);
-            });
-        }
-    }
-
-    createTileMesh(w, h, d) {
-        const materials = [
-            new THREE.MeshPhongMaterial({ color: 0x228b22 }), 
-            new THREE.MeshPhongMaterial({ color: 0x228b22 }), 
-            new THREE.MeshPhongMaterial({ color: 0x228b22 }), 
-            new THREE.MeshPhongMaterial({ color: 0x228b22 }), 
-            new THREE.MeshPhongMaterial({ color: 0xffffff }), 
-            new THREE.MeshPhongMaterial({ color: 0x004d00 }) 
-        ];
-        return new THREE.Mesh(new THREE.BoxGeometry(w, h, d), materials);
-    }
-
-    addLabelToTile(mesh, text, code) {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 128; canvas.height = 128;
-        ctx.fillStyle = '#fff'; ctx.fillRect(0,0,128,128);
-        
-        let color = "#000";
-        if (code) {
-            if (code.startsWith('M')) color = "#c00";
-            if (code.startsWith('F')) color = "#e60";
-            if (code === 'Z6') color = "#080";
-        }
-        
-        ctx.fillStyle = color;
-        ctx.font = 'bold 95px serif';
-        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
-        ctx.fillText(text, 64, 64);
-
-        const texture = new THREE.CanvasTexture(canvas);
-        const labelMat = new THREE.MeshBasicMaterial({ map: texture, transparent: true });
-        const labelGeo = new THREE.PlaneGeometry(0.78, 1.18);
-        const label = new THREE.Mesh(labelGeo, labelMat);
-        label.position.z = 0.276; 
-        mesh.add(label);
-    }
-
-    nextTurn() {
-        if (!this.isGameActive || this.waitingForAction) return;
-
-        const currentId = this.turn % 4;
-        const isComp = this.isComputer(currentId);
-        const label = isComp ? `電腦 ${currentId}` : `玩家 ${currentId + 1}`;
-        
-        document.getElementById('turn-indicator').innerText = `🧧 輪到 ${label} 了`;
-        document.getElementById('turn-indicator').className = `text-center text-xl font-black drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] tracking-widest bg-black/40 py-2 rounded-lg mx-auto px-6 backdrop-blur-sm ${isComp ? 'text-gray-300' : 'text-yellow-400'}`;
-
-        if (this.autoCamera && this.playerModes !== '1h3c') {
-            this.resetCameraToCurrentPlayer();
-        }
-
-        for(let i=0; i<4; i++) {
-            const el = document.getElementById(`p${i}-ui`);
-            if(i === currentId) {
-                el.classList.add('text-yellow-300', 'font-bold', 'scale-110');
-                el.classList.remove('text-gray-400');
-            } else {
-                el.classList.remove('text-yellow-300', 'font-bold', 'scale-110');
-                el.classList.add('text-gray-400');
-            }
-        }
-
-        if(this.wall.length > 0) {
-            const newTile = this.wall.shift();
-            // 花牌檢查
-            if (this.rule === 'TW' && newTile.startsWith('F')) {
-                this.handleDrawFlower(currentId, newTile);
-            } else {
-                this.hands[currentId].push(newTile);
-                this.renderTiles();
-                this.updateUI();
-                
-                // --- 自摸檢查 (Tsumo Check) ---
-                if (!isComp) {
-                    if (this.checkWin(this.hands[currentId])) {
-                        // 亮起胡牌按鈕，並不強制結束，允許過水
-                        document.getElementById('action-btns').classList.remove('hidden');
-                        const huBtn = document.getElementById('btn-hu');
-                        huBtn.classList.add('btn-hu-active');
-                        huBtn.disabled = false;
-                        huBtn.style.opacity = '1';
-                        // 禁用其他吃碰槓
-                        ['chi', 'pon', 'kan', 'skip'].forEach(id => {
-                            const b = document.getElementById(`btn-${id}`);
-                            if(id === 'skip') { 
-                                // 允許過水 (skip) = 打牌
-                                b.disabled = false; 
-                                b.style.opacity = '1';
-                                b.innerText = "過水(出牌)";
-                                b.onclick = () => {
-                                    // 恢復按鈕狀態並隱藏
-                                    huBtn.classList.remove('btn-hu-active');
-                                    document.getElementById('action-btns').classList.add('hidden');
-                                    b.innerText = "過";
-                                };
-                            } else {
-                                b.disabled = true; b.style.opacity = '0.3'; 
-                            }
-                        });
-                        
-                        this.waitingForAction = true; // 暫停流程等待玩家決定
-                        // 自摸不用 context，因為是自己的牌
-                        this.currentActionContext = { tile: newTile, from: currentId, type: 'tsumo' };
+        if(this.wall.length){
+            const t=this.wall.shift();
+            if(this.rule==='TW'&&t.startsWith('F'))this.handleDrawFlower(p,t);
+            else{
+                this.hands[p].push(t); this.renderTiles();
+                // 自摸檢查
+                if(this.checkWin(this.hands[p])){
+                    if(!isC) this.trigAct(['hu'],t,p,true,p);
+                    else { 
+                        // 電腦自摸
+                        this.celebration.start();
+                        this.showResult(p, 1000, `電腦 ${p} 自摸胡牌！`);
+                        this.updateCredits(-1000); // 玩家輸錢
                     }
-                }
-
-                if(isComp && !this.waitingForAction) {
-                    this.autoDiscardTimeout = setTimeout(() => this.autoDiscard(currentId), 1500);
-                }
+                } else if(isC) setTimeout(()=>this.autoDiscard(p),1200);
             }
-        } else {
-            this.showMessage("牌抽完了，圓圓滿滿流局！");
-        }
+        }else this.showResult(-1,0,"流局！");
     }
-
-    handleDrawFlower(playerId, flowerTile) {
-        this.flowers[playerId].push(flowerTile); 
-        this.showMessage(`補花：${TILE_EMOJI[flowerTile]}`);
-        this.renderTiles();
-
-        setTimeout(() => {
-            if(this.wall.length > 0) {
-                const replacementTile = this.wall.pop(); 
-                if (replacementTile.startsWith('F')) {
-                    this.handleDrawFlower(playerId, replacementTile);
-                } else {
-                    this.hands[playerId].push(replacementTile);
-                    this.renderTiles();
-                    
-                    if(this.isComputer(playerId)) {
-                        this.autoDiscardTimeout = setTimeout(() => this.autoDiscard(playerId), 1500);
-                    }
-                }
-            } else {
-                this.showMessage("牌抽完了！");
-            }
-        }, 800);
-    }
-
-    autoDiscard(playerId) {
-        if (!this.isGameActive) return;
-        const idx = Math.floor(Math.random() * this.hands[playerId].length);
-        this.discardTile(playerId, idx);
-    }
-
-    discardTile(playerId, index) {
-        if (!this.isGameActive) return;
-        const tile = this.hands[playerId].splice(index, 1)[0];
-        this.hands[playerId].sort();
-        
-        this.discards[playerId].push(tile);
-        this.renderTiles();
-        
-        const label = this.isComputer(playerId) ? `電腦 ${playerId}` : `玩家 ${playerId + 1}`;
-        this.showFocusTile(tile, label);
-        this.hidePreview();
-
-        // 檢查其他真人玩家是否能榮胡/碰/吃
-        // 我們需要遍歷所有對手 (非出牌者)
-        // 優先順序：胡 > 碰/槓 > 吃
-        // 這裡簡化邏輯：如果多人同時喊，這裡只取順位最近的一位 (實際規則更複雜)
-        // 這裡暫時只檢查一個動作，若有，則中斷
-        
-        let actionTriggered = false;
-        
-        // 迴圈檢查其他三家
-        for (let i = 1; i < 4; i++) {
-            const checkPlayerId = (playerId + i) % 4;
-            
-            // 如果該玩家是電腦，跳過 (電腦不吃碰槓)
-            if (this.isComputer(checkPlayerId)) continue;
-            
-            const actions = this.checkAvailableActions(tile, playerId, checkPlayerId);
-            if (actions.length > 0) {
-                this.triggerPlayerAction(actions, tile, playerId, false, checkPlayerId); // 傳入觸發動作的玩家ID
-                actionTriggered = true;
-                break; // 暫時只處理一位玩家的動作，避免衝突
+    handleDrawFlower(p,t){this.flowers[p].push(t);this.showMessage("補花");this.renderTiles();setTimeout(()=>{if(this.wall.length){const n=this.wall.pop();if(n.startsWith('F'))this.handleDrawFlower(p,n);else{this.hands[p].push(n);this.renderTiles();if(this.isComputer(p))setTimeout(()=>this.autoDiscard(p),1200);}}},600);}
+    autoDiscard(p){this.discardTile(p,Math.floor(Math.random()*this.hands[p].length));}
+    discardTile(p,i){
+        const t=this.hands[p].splice(i,1)[0]; this.hands[p].sort();
+        // 修正：從手牌移除後，必須重新渲染一次以清除視覺殘留，再顯示特寫
+        // 但為了流暢，我們在 renderTiles 裡已經全清重建，所以邏輯是安全的
+        this.discards[p].push(t); this.renderTiles();
+        this.showFocus(t, this.isComputer(p)?`電腦 ${p}`:`玩家 ${p+1}`);
+        let int=false;
+        for(let i=0;i<4;i++){
+            if(i!==p && !this.isComputer(i)){
+                const acts=this.checkActs(t,p,i);
+                if(acts.length){this.trigAct(acts,t,p,false,i);int=true;break;}
+            } else if (i!==p && this.isComputer(i)) {
+                 // 電腦胡牌判定 (榮胡)
+                 if(this.checkWin([...this.hands[i], t])) {
+                     this.celebration.start();
+                     this.showResult(i, 500, `電腦 ${i} 胡牌！`);
+                     this.updateCredits(-500); // 玩家輸錢
+                     int = true; break;
+                 }
             }
         }
-
-        if (!actionTriggered) {
-            this.finishTurn();
-        }
+        if(!int){this.turn++;this.nextTurn();}
     }
-
-    finishTurn() {
-        this.turn++;
-        this.nextTurn();
+    checkActs(t,f,to){
+        const h=this.hands[to], a=[]; if(this.checkWin([...h,t]))a.push('hu');
+        const s=h.filter(x=>x===t).length; if(s>=2)a.push('pon');if(s>=3)a.push('kan');
+        if((f+1)%4===to && t.match(/^[MPS]/)){const n=parseInt(t[1]),su=t[0],hn=h.filter(x=>x.startsWith(su)).map(x=>parseInt(x[1]));if((hn.includes(n-1)&&hn.includes(n+1))||(hn.includes(n-2)&&hn.includes(n-1))||(hn.includes(n+1)&&hn.includes(n+2)))a.push('chi');}
+        return a;
     }
-
-    checkAvailableActions(tileCode, discarderId, checkerId) {
-        const hand = this.hands[checkerId];
-        const actions = [];
-        
-        const tempHand = [...hand, tileCode];
-        if (this.checkWin(tempHand)) {
-            actions.push('hu');
-        }
-
-        const sameCount = hand.filter(t => t === tileCode).length;
-        if (sameCount >= 2) actions.push('pon');
-        if (sameCount >= 3) actions.push('kan');
-        
-        // 只有下家能吃上家
-        // discarderId -> checkerId 必須是 discarderId + 1 = checkerId (mod 4)
-        if ((discarderId + 1) % 4 === checkerId && tileCode.match(/[MPS]/)) { 
-            const suit = tileCode.charAt(0);
-            const num = parseInt(tileCode.charAt(1));
-            const handNums = hand.filter(t => t.startsWith(suit)).map(t => parseInt(t.charAt(1)));
-            
-            const hasLeft = handNums.includes(num-2) && handNums.includes(num-1);
-            const hasMiddle = handNums.includes(num-1) && handNums.includes(num+1);
-            const hasRight = handNums.includes(num+1) && handNums.includes(num+2);
-            
-            if (hasLeft || hasMiddle || hasRight) actions.push('chi');
-        }
-        
-        return actions;
-    }
-
-    triggerPlayerAction(actions, tileCode, discarderId, isSelfDraw, playerIdx = 0) {
-        this.waitingForAction = true;
-        this.currentActionContext = { tile: tileCode, from: discarderId, type: isSelfDraw ? 'tsumo' : 'ron', playerIdx: playerIdx };
-        
-        // 自動切換視角到該玩家 (如果是別人打牌觸發)
-        if (!isSelfDraw && this.autoCamera) {
-            // 暫時切換到該玩家視角
-            const config = this.baseCameraPositions[playerIdx];
-            const targetPos = this.getResponsiveCameraPosition(config.pos);
-            new TWEEN.Tween(this.camera.position).to(targetPos, 500).easing(TWEEN.Easing.Cubic.Out).start();
-            new TWEEN.Tween(this.controls.target).to(config.target, 500).easing(TWEEN.Easing.Cubic.Out).start();
-        }
-
+    trigAct(a,t,f,sl,pi){
+        this.waitingForAction=true; this.currentActionContext={tile:t,from:f,type:sl?'tsumo':'ron',pIdx:pi};
         document.getElementById('action-btns').classList.remove('hidden');
-        
-        ['chi', 'pon', 'kan', 'hu'].forEach(act => {
-            const btn = document.getElementById(`btn-${act}`);
-            if (actions.includes(act)) {
-                btn.disabled = false;
-                btn.style.opacity = '1';
-                if(act === 'hu') btn.classList.add('btn-hu-active');
-            } else {
-                btn.disabled = true;
-                btn.style.opacity = '0.3';
-                btn.classList.remove('btn-hu-active');
-            }
-        });
-        
-        const skipBtn = document.getElementById('btn-skip');
-        skipBtn.innerText = "過";
-        skipBtn.disabled = false;
-        skipBtn.style.opacity = '1';
-        skipBtn.onclick = () => game.handlePlayerAction('skip');
-
-        const overlay = document.getElementById('preview-overlay');
-        overlay.style.opacity = '1';
+        ['chi','pon','kan','hu'].forEach(k=>{const b=document.getElementById(`btn-${k}`);b.disabled=!a.includes(k);b.classList.toggle('btn-hu-active',k==='hu'&&a.includes(k));});
+        document.getElementById('preview-overlay').style.opacity='1';
     }
-
-    handlePlayerAction(action) {
-        document.getElementById('action-btns').classList.add('hidden');
-        document.getElementById('btn-hu').classList.remove('btn-hu-active'); 
-        document.getElementById('preview-overlay').style.opacity = '0';
-        document.getElementById('chi-select-btns').classList.add('hidden'); // 隱藏吃牌選擇
-        this.waitingForAction = false;
-        
-        const ctx = this.currentActionContext;
-
-        if (ctx.type === 'tsumo') {
-            if (action === 'hu') {
-                this.surpriseEffect("🧧 自摸！恭喜發財！");
-                this.updateCredits(1000); // 獎勵
-                this.celebration.start(); // 觸發慶祝特效
-                this.showResult(ctx.playerIdx, 1000, "自摸！新春大發！");
-            }
-            return;
-        }
-
-        if (action === 'skip') {
-            this.showMessage("過");
-            this.finishTurn();
-            return;
-        }
-
-        // 吃牌選擇邏輯
-        if (action === 'chi') {
-             const hand = this.hands[ctx.playerIdx];
-             const tile = ctx.tile;
-             const s = tile[0], n = parseInt(tile[1]);
-             const combos = [];
-             // 組合1: n-2, n-1
-             if (hand.includes(s+(n-2)) && hand.includes(s+(n-1))) combos.push([s+(n-2), s+(n-1), tile]);
-             // 組合2: n-1, n+1
-             if (hand.includes(s+(n-1)) && hand.includes(s+(n+1))) combos.push([s+(n-1), tile, s+(n+1)]);
-             // 組合3: n+1, n+2
-             if (hand.includes(s+(n+1)) && hand.includes(s+(n+2))) combos.push([tile, s+(n+1), s+(n+2)]);
-             
-             if (combos.length > 1) {
-                 this.showChiSelection(combos, ctx.playerIdx, tile);
-                 return; 
-             } else if (combos.length === 1) {
-                 this.discards[ctx.from].pop(); 
-                 this.executeChi(ctx.playerIdx, combos[0], tile);
-             }
+    handlePlayerAction(a){
+        const c=this.currentActionContext; document.getElementById('action-btns').classList.add('hidden');document.getElementById('preview-overlay').style.opacity='0';document.getElementById('chi-select-btns').classList.add('hidden');this.waitingForAction=false;
+        if(c.type==='tsumo'){if(a==='hu'){this.celebration.start();this.showResult(c.pIdx,1000,"自摸！發財！");return;}}
+        if(a==='skip'){this.showMessage("過");this.turn++;this.nextTurn();return;}
+        if(a==='chi'){
+            const h=this.hands[c.pIdx],t=c.tile,s=t[0],n=parseInt(t[1]),opts=[];
+            if(h.includes(s+(n-2))&&h.includes(s+(n-1)))opts.push([s+(n-2),s+(n-1),t]);
+            if(h.includes(s+(n-1))&&h.includes(s+(n+1)))opts.push([s+(n-1),t,s+(n+1)]);
+            if(h.includes(s+(n+1))&&h.includes(s+(n+2)))opts.push([t,s+(n+1),s+(n+2)]);
+            if(opts.length>1){this.showChiSel(opts,c.pIdx,t);return;}
+            else if(opts.length===1){this.discards[c.from].pop();this.execChi(c.pIdx,opts[0],t);}
         } else {
-             const tile = ctx.tile;
-             const fromPlayer = ctx.from;
-             this.discards[fromPlayer].pop();
-             this.executeMeld(ctx.playerIdx, action, tile);
+            this.discards[c.from].pop(); this.execMeld(c.pIdx,a,c.tile);
         }
-        
-        // 執行胡牌
-        if (action === 'hu') {
-            this.surpriseEffect("🧧 胡啦！恭喜發財！");
-            this.updateCredits(500); 
-            this.celebration.start(); // 觸發慶祝特效
-            this.showResult(ctx.playerIdx, 500, "胡啦！恭喜發財！");
-            return;
-        }
-
-        if (action !== 'chi' || (action === 'chi' && this.waitingForAction === false)) {
-             this.finalizeAction(ctx.playerIdx);
-        }
+        if(a==='hu'){this.celebration.start();this.showResult(c.pIdx,500,"胡牌！");return;}
+        if(a!=='chi'||(a==='chi'&&!this.waitingForAction)){this.finalize(c.pIdx);}
     }
-
-    showChiSelection(combos, pIdx, targetTile) {
-        this.waitingForAction = true; 
-        const container = document.getElementById('chi-select-btns');
-        container.innerHTML = ''; 
-        container.classList.remove('hidden');
-        document.getElementById('action-btns').classList.add('hidden'); 
-        document.getElementById('preview-overlay').style.opacity = '1';
-
-        combos.forEach((combo, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'btn-chi-select';
-            let text = '';
-            combo.sort().forEach(c => text += TILE_EMOJI[c]);
-            btn.innerText = text;
-            
-            btn.onclick = () => {
-                container.classList.add('hidden');
-                document.getElementById('preview-overlay').style.opacity = '0';
-                this.discards[this.currentActionContext.from].pop(); 
-                this.executeChi(pIdx, combo, targetTile);
-                this.finalizeAction(pIdx);
-            };
-            container.appendChild(btn);
-        });
+    showChiSel(opts,pi,t){
+        this.waitingForAction=true;const div=document.getElementById('chi-select-btns');div.innerHTML='';div.classList.remove('hidden');document.getElementById('action-btns').classList.add('hidden');document.getElementById('preview-overlay').style.opacity='1';
+        opts.forEach(o=>{const b=document.createElement('button');b.className='btn-chi-select';b.innerText=o.sort().map(c=>TILE_EMOJI[c]).join('');b.onclick=()=>{div.classList.add('hidden');document.getElementById('preview-overlay').style.opacity='0';this.discards[this.currentActionContext.from].pop();this.execChi(pi,o,t);this.finalize(pi);};div.appendChild(b);});
     }
-
-    executeChi(pIdx, comboTiles, targetTile) {
-        const hand = this.hands[pIdx];
-        const toRemove = [...comboTiles];
-        const targetIdx = toRemove.indexOf(targetTile);
-        if (targetIdx > -1) toRemove.splice(targetIdx, 1); 
-        
-        toRemove.forEach(t => {
-            const idx = hand.indexOf(t);
-            if (idx > -1) hand.splice(idx, 1);
-        });
-        
-        this.melds[pIdx].push(comboTiles.sort());
+    execChi(p,tiles,tgt){const h=this.hands[p],rem=[...tiles];const ti=rem.indexOf(tgt);if(ti>-1)rem.splice(ti,1);rem.forEach(x=>{const i=h.indexOf(x);if(i>-1)h.splice(i,1);});this.melds[p].push(tiles.sort());}
+    execMeld(p,t,tile){const h=this.hands[p],m=[tile];
+        if(t==='pon')for(let i=0;i<2;i++){const idx=h.indexOf(tile);if(idx>-1)m.push(h.splice(idx,1)[0]);}
+        else if(t==='kan')for(let i=0;i<3;i++){const idx=h.indexOf(tile);if(idx>-1)m.push(h.splice(idx,1)[0]);}
+        this.melds[p].push(m.sort());
     }
-
-    finalizeAction(pIdx) {
-        this.turn = pIdx; 
-        this.renderTiles(); 
-        this.updateUI(); 
-        document.getElementById('turn-indicator').innerText = `輪到 玩家 ${pIdx+1} 出牌`;
-        this.waitingForAction = false;
-        this.currentActionContext = null;
+    finalize(p){this.turn=p;this.renderTiles();this.updateUI();document.getElementById('turn-indicator').innerText=`輪到 玩家 ${p+1} 出牌`;this.waitingForAction=false;this.currentActionContext=null;}
+    confirmDiscardFromPreview(){if(this.selectedTile&&!this.waitingForAction&&this.isGameActive){const o=this.selectedTile.userData.o;if(o===(this.turn%4)&&!this.isComputer(o)){this.discardTile(o,this.selectedTile.userData.idx);this.clearSelection();}}}
+    handleTap(x,y){
+        if(!this.isGameActive || (this.waitingForAction && (!this.currentActionContext || this.currentActionContext.type!=='tsumo'))) return;
+        const p=this.turn%4; if(this.isComputer(p)) return;
+        this.mouse.x=(x/window.innerWidth)*2-1; this.mouse.y=-(y/window.innerHeight)*2+1;
+        this.raycaster.setFromCamera(this.mouse,this.camera);
+        const hits=this.raycaster.intersectObjects(this.mahjongGroup.children,true);
+        if(hits.length){ let o=hits[0].object; while(o&&(!o.userData||o.userData.type!=='hand'))o=o.parent; if(o&&o.userData.o===p) this.onTileClick(o,p); } else this.clearSelection();
     }
-
-    // 新增確認出牌方法 (從預覽區點擊觸發)
-    confirmDiscardFromPreview() {
-        if (this.selectedTile && !this.waitingForAction && this.isGameActive) {
-            const owner = this.selectedTile.userData.owner;
-            const index = this.selectedTile.userData.index;
-            
-            const currentId = this.turn % 4;
-            // 只要選取的牌是當前回合玩家的，且該玩家不是電腦，就允許打出
-            if (owner === currentId && !this.isComputer(owner)) {
-                this.discardTile(owner, index);
-                this.clearSelection();
-            }
-        }
+    onTileClick(o,p){
+        if(this.selectedTile===o){this.discardTile(p,o.userData.idx);this.clearSelection();if(this.currentActionContext&&this.currentActionContext.type==='tsumo'){document.getElementById('action-btns').classList.add('hidden');this.waitingForAction=false;this.currentActionContext=null;}}
+        else{this.clearSelection();this.selectedTile=o;o.position.y+=0.8;o.scale.set(1.2,1.2,1.2);o.children.forEach(c=>{if(c.material)c.material.color.set(0xffffdd);});this.showPreview(o.userData.code);}
     }
-
-    executeMeld(playerId, type, targetTile) {
-        const hand = this.hands[playerId];
-        const meld = [targetTile]; 
-        
-        if (type === 'pon') {
-            for(let i=0; i<2; i++) {
-                const idx = hand.indexOf(targetTile);
-                if(idx > -1) {
-                    meld.push(hand.splice(idx, 1)[0]);
-                }
-            }
-        } else if (type === 'kan') {
-            for(let i=0; i<3; i++) {
-                const idx = hand.indexOf(targetTile);
-                if(idx > -1) {
-                    meld.push(hand.splice(idx, 1)[0]);
-                }
-            }
-        } else if (type === 'chi') {
-            const suit = targetTile.charAt(0);
-            const num = parseInt(targetTile.charAt(1));
-            
-            const tryRemove = (n) => {
-                const code = suit + n;
-                const idx = hand.indexOf(code);
-                if (idx > -1) {
-                    hand.splice(idx, 1);
-                    meld.push(code);
-                    return true;
-                }
-                return false;
-            };
-            
-            if (tryRemove(num-1) && tryRemove(num+1)) {} 
-            else if (tryRemove(num-2) && tryRemove(num-1)) {}
-            else if (tryRemove(num+1) && tryRemove(num+2)) {}
-            
-            meld.sort(); 
-        }
-        
-        this.melds[playerId].push(meld);
-    }
-
-    showFocusTile(tileCode, playerName) {
-        const overlay = document.getElementById('preview-overlay');
-        const box = document.getElementById('preview-box');
-        const emoji = document.getElementById('preview-emoji');
-        const text = document.getElementById('preview-text');
-        const sub = document.getElementById('preview-sub');
-        const hint = document.getElementById('preview-hint');
-        
-        emoji.innerText = TILE_EMOJI[tileCode];
-        text.innerText = playerName + " 打出";
-        sub.innerText = "";
-        hint.classList.add('hidden'); // 對方打牌時，不能點擊預覽出牌
-        box.classList.remove('interactive-preview'); // 移除互動樣式
-        
-        box.classList.remove('preview-anim');
-        void box.offsetWidth;
-        box.classList.add('preview-anim');
-        overlay.style.opacity = '1';
-        
-        if (!this.waitingForAction) {
-            setTimeout(() => { if(!this.waitingForAction) overlay.style.opacity = '0'; }, 1500);
-        }
-    }
-
-    showPreview(tileCode) {
-        const overlay = document.getElementById('preview-overlay');
-        const box = document.getElementById('preview-box');
-        const emoji = document.getElementById('preview-emoji');
-        const text = document.getElementById('preview-text');
-        const sub = document.getElementById('preview-sub');
-        const hint = document.getElementById('preview-hint');
-
-        emoji.innerText = TILE_EMOJI[tileCode];
-        text.innerText = "已選取";
-        sub.innerText = "(再次點擊出牌)";
-        hint.classList.remove('hidden'); // 顯示點擊提示
-        box.classList.add('interactive-preview'); // 增加互動樣式
-        
-        box.classList.remove('preview-anim');
-        void box.offsetWidth;
-        box.classList.add('preview-anim');
-        overlay.style.opacity = '1';
-    }
-
-    hidePreview() {
-        document.getElementById('preview-overlay').style.opacity = '0';
-    }
-
-    updateUI() {
-        document.getElementById('mode-display').innerText = this.rule === 'JP' ? '日本麻將' : '臺灣麻將';
-        document.getElementById('wall-count').innerText = this.wall.length;
-        for(let i=0; i<4; i++) {
-            document.getElementById(`s${i}`).innerText = this.scores[i];
-        }
-    }
-
-    showMessage(txt) {
-        const box = document.getElementById('msg-box');
-        box.innerText = txt;
-        box.style.opacity = '1';
-        setTimeout(() => box.style.opacity = '0', 2000);
-    }
-
-    surpriseEffect(txt) {
-        const box = document.getElementById('msg-box');
-        box.innerText = txt;
-        box.classList.add('surprise-text');
-        box.style.opacity = '1';
-        setTimeout(() => {
-            box.style.opacity = '0';
-            box.classList.remove('surprise-text');
-        }, 1500);
-    }
-
-    onPointerDown(event) {
-        this.pointerDownTime = Date.now();
-        this.pointerDownPos.set(event.clientX, event.clientY);
-    }
-
-    onPointerUp(event) {
-        const timeDiff = Date.now() - this.pointerDownTime;
-        const distDiff = Math.hypot(event.clientX - this.pointerDownPos.x, event.clientY - this.pointerDownPos.y);
-        if (timeDiff < 500 && distDiff < 10) {
-            this.handleTap(event.clientX, event.clientY);
-        }
-    }
-
-    handleTap(clientX, clientY) {
-        if (!this.isGameActive || this.waitingForAction) {
-            if (this.currentActionContext && this.currentActionContext.type === 'tsumo') {
-                // allow
-            } else {
-                return;
-            }
-        }
-
-        const currentId = this.turn % 4;
-        
-        // 修正：移除了限制 "currentId !== 0" 的判斷
-        // 只要當前輪到的玩家不是電腦，就允許操作 (適用於多人同機模式)
-        if (this.isComputer(currentId)) return; 
-
-        this.mouse.x = (clientX / window.innerWidth) * 2 - 1;
-        this.mouse.y = -(clientY / window.innerHeight) * 2 + 1;
-
-        this.raycaster.setFromCamera(this.mouse, this.camera);
-        const intersects = this.raycaster.intersectObjects(this.tilesObjects, true);
-
-        if (intersects.length > 0) {
-            let targetObj = intersects[0].object;
-            while(targetObj && (!targetObj.userData || targetObj.userData.type !== 'hand')) {
-                targetObj = targetObj.parent;
-            }
-
-            if(targetObj && targetObj.userData.owner === currentId) {
-                this.onTileClick(targetObj, currentId);
-            }
-        } else {
-            this.clearSelection();
-        }
-    }
-
-    onTileClick(obj, playerId) {
-        if (this.selectedTile === obj) {
-            this.discardTile(playerId, obj.userData.index);
-            this.clearSelection();
-            
-            if (this.currentActionContext && this.currentActionContext.type === 'tsumo') {
-                document.getElementById('action-btns').classList.add('hidden');
-                document.getElementById('btn-hu').classList.remove('btn-hu-active');
-                this.waitingForAction = false;
-                this.currentActionContext = null;
-            }
-
-        } else {
-            this.clearSelection();
-            this.selectedTile = obj;
-            
-            this.selectedTile.position.y += 0.8; 
-            this.selectedTile.scale.set(1.3, 1.3, 1.3);
-            
-            if (Array.isArray(this.selectedTile.material)) {
-                this.selectedTile.material.forEach(m => {
-                    if (m.name !== 'highlight') {
-                        m.oldEmissive = m.emissive.getHex();
-                        m.emissive.set(0x333333); 
-                    }
-                });
-            }
-
-            const outlineGeo = new THREE.BoxGeometry(0.9, 1.3, 0.6);
-            const outlineMat = new THREE.MeshBasicMaterial({ color: 0xffff00, side: THREE.BackSide, transparent: true, opacity: 0.3 });
-            const outline = new THREE.Mesh(outlineGeo, outlineMat);
-            outline.scale.set(1.05, 1.05, 1.05);
-            outline.name = "highlight";
-            this.selectedTile.add(outline);
-
-            this.showPreview(obj.userData.code);
-        }
-    }
-
-    clearSelection() {
-        if (this.selectedTile) {
-            this.selectedTile.position.y -= 0.8;
-            this.selectedTile.scale.set(1, 1, 1);
-            
-            if (Array.isArray(this.selectedTile.material)) {
-                this.selectedTile.material.forEach(m => {
-                    if (m.oldEmissive !== undefined) {
-                        m.emissive.setHex(m.oldEmissive);
-                    } else {
-                        m.emissive.set(0x000000);
-                    }
-                });
-            }
-
-            const highlight = this.selectedTile.getObjectByName("highlight");
-            if(highlight) this.selectedTile.remove(highlight);
-            this.selectedTile = null;
-            this.hidePreview();
-        }
-    }
-
-    checkWin(hand) {
-        const pureHand = hand.filter(t => !t.startsWith('F'));
-        const tiles = {};
-        pureHand.forEach(t => tiles[t] = (tiles[t] || 0) + 1);
-        
-        const tileCodes = Object.keys(tiles).sort();
-        
-        let pairCount = 0;
-        for (let t in tiles) {
-            if (tiles[t] >= 2) pairCount++;
-        }
-        if (pairCount === 7 && pureHand.length === 14) return true; 
-        if (pairCount === 8 && pureHand.length === 16) return true; 
-
-        for (let t of tileCodes) {
-            if (tiles[t] >= 2) {
-                const tempTiles = { ...tiles };
-                tempTiles[t] -= 2; 
-                if (tempTiles[t] === 0) delete tempTiles[t];
-                
-                if (this.canFormMelds(tempTiles)) return true;
-            }
-        }
-        return false;
-    }
-
-    canFormMelds(tiles) {
-        const keys = Object.keys(tiles).sort();
-        if (keys.length === 0) return true; 
-
-        const first = keys[0];
-        if (tiles[first] >= 3) {
-            const nextTiles = { ...tiles };
-            nextTiles[first] -= 3;
-            if (nextTiles[first] === 0) delete nextTiles[first];
-            if (this.canFormMelds(nextTiles)) return true;
-        }
-
-        if (first.match(/^[MPS]/)) {
-            const suit = first.charAt(0);
-            const num = parseInt(first.charAt(1));
-            const t2 = suit + (num + 1);
-            const t3 = suit + (num + 2);
-
-            if (tiles[t2] > 0 && tiles[t3] > 0) {
-                const nextTiles = { ...tiles };
-                nextTiles[first]--;
-                nextTiles[t2]--;
-                nextTiles[t3]--;
-                if (nextTiles[first] === 0) delete nextTiles[first];
-                if (nextTiles[t2] === 0) delete nextTiles[t2];
-                if (nextTiles[t3] === 0) delete nextTiles[t3];
-                if (this.canFormMelds(nextTiles)) return true;
-            }
-        }
-
-        return false;
-    }
-
-    animate() {
-        requestAnimationFrame(() => this.animate());
-        TWEEN.update(); 
-        if(this.controls) this.controls.update();
-        this.renderer.render(this.scene, this.camera);
-    }
-
-    // 顯示結算畫面 (Show Result)
-    showResult(winner, coins, title) {
-        this.isGameActive = false; if(winner!==-1) this.updateCredits(coins);
-        document.getElementById('result-overlay').style.display = 'flex';
-        document.getElementById('result-title').innerText = title;
-        document.getElementById('result-winner').innerText = winner===-1?"平局收場":`玩家 ${winner+1} 獲勝！`;
-        document.getElementById('result-coins').innerText = `獲得代幣: ${winner===-1?0:coins}`;
-        const display = document.getElementById('result-hand'); display.innerHTML = '';
-        if(winner!==-1) this.hands[winner].forEach(c=>{ const s=document.createElement('span'); s.innerText=TILE_EMOJI[c]; display.appendChild(s); });
-    }
+    clearSelection(){if(this.selectedTile){this.selectedTile.position.y-=0.8;this.selectedTile.scale.set(1,1,1);this.selectedTile.children.forEach(c=>{if(c.material)c.material.color.set(0xffffff);});this.selectedTile=null;this.hidePreview();}}
+    checkWin(h){const p=h.filter(x=>!x.startsWith('F')).sort();if(p.length%3!==2)return false;const c={};p.forEach(x=>c[x]=(c[x]||0)+1);let pr=0;for(let k in c)if(c[k]>=2)pr++;if(pr===7||pr===8)return true;const win=(cnt)=>{const ks=Object.keys(cnt).filter(k=>cnt[k]>0).sort();if(!ks.length)return true;const f=ks[0];if(cnt[f]>=3){const n={...cnt};n[f]-=3;if(win(n))return true;}if(f.match(/^[MPS]/)){const s=f[0],v=parseInt(f[1]),t2=s+(v+1),t3=s+(v+2);if(cnt[t2]&&cnt[t3]){const n={...cnt};n[f]--;n[t2]--;n[t3]--;if(win(n))return true;}}return false;};for(let k in c)if(c[k]>=2){const n={...c};n[k]-=2;if(win(n))return true;}return false;}
+    showFocus(c,n){document.getElementById('preview-emoji').innerText=TILE_EMOJI[c];document.getElementById('preview-text').innerText=n+" 打出";document.getElementById('preview-sub').innerText="";document.getElementById('preview-hint').classList.add('hidden');document.getElementById('preview-overlay').style.opacity='1';if(!this.waitingForAction)setTimeout(()=>document.getElementById('preview-overlay').style.opacity='0',1200);}
+    showPreview(c){document.getElementById('preview-emoji').innerText=TILE_EMOJI[c];document.getElementById('preview-text').innerText="已選取";document.getElementById('preview-sub').innerText="再次點擊出牌";document.getElementById('preview-hint').classList.remove('hidden');document.getElementById('preview-overlay').style.opacity='1';}
+    hidePreview(){document.getElementById('preview-overlay').style.opacity='0';}
+    updateUI(){document.getElementById('mode-display').innerText=this.rule==='JP'?'日本麻將':'臺灣麻將';document.getElementById('wall-count').innerText=this.wall.length;document.getElementById('credit-count').innerText=this.credits;for(let i=0;i<4;i++){const e=document.getElementById(`p${i}-ui`);if(e)e.style.color=(this.turn%4===i)?'#fbbf24':'#fff';}}
+    showMessage(t){const b=document.getElementById('msg-box');b.innerText=t;b.style.opacity='1';setTimeout(()=>b.style.opacity='0',1500);}
+    updateCredits(a){this.credits+=a;this.updateCreditUI();} updateCreditUI(){document.getElementById('credit-count').innerText=this.credits;}
+    animate(){requestAnimationFrame(()=>this.animate());TWEEN.update();this.controls.update();this.renderer.render(this.scene,this.camera);}
+    restartGame(){ this.setupGame(this.rule, this.playerModes); document.getElementById('result-overlay').style.display='none'; }
+    showMenu(){ this.isGameActive=false; document.getElementById('result-overlay').style.display='none'; document.getElementById('menu-overlay').style.display='flex'; }
 }
 
-let game = new MahjongGame();
-let selectedRule = 'TW';
-
-function selectRule(rule) {
-    selectedRule = rule;
-    const jpBtn = document.getElementById('rule-jp');
-    const twBtn = document.getElementById('rule-tw');
-    const active = "flex-1 py-3 rounded-xl border-2 border-yellow-400 bg-red-700 font-black shadow-lg";
-    const inactive = "flex-1 py-3 rounded-xl border-2 border-white/20 bg-white/5 opacity-60";
-    jpBtn.className = rule === 'JP' ? active : inactive;
-    twBtn.className = rule === 'TW' ? active : inactive;
-}
-
-function startGame() {
-    const audio = document.getElementById('bgm');
-    audio.volume = 0.5;
-    audio.play().catch(e => console.log("需互動後才能播放音樂"));
-
-    const mode = document.getElementById('player-mode').value;
-    document.getElementById('menu-overlay').style.display = 'none';
-    game.init(); 
-    game.setupGame(selectedRule, mode);
-}
-
-function returnToMenu() {
-    game.endGame();
-}
-
-window.onload = () => selectRule('TW');
+let game=new MahjongGame();
+function selectRule(r){game.rule=r;document.getElementById('rule-jp').style.borderColor=r==='JP'?'#fbbf24':'#fff2';document.getElementById('rule-tw').style.borderColor=r==='TW'?'#fbbf24':'#fff2';}
+function startGame(){document.getElementById('bgm').play().catch(()=>{});game.init();game.setupGame(game.rule,document.getElementById('player-mode').value);document.getElementById('menu-overlay').style.display='none';}
+function returnToMenu(){game.showMenu();}
+window.onload=()=>selectRule('TW');
 </script>
-
 </body>
 </html>
