@@ -241,10 +241,10 @@
         <div class="space-y-2">
             <label class="text-yellow-100 font-bold text-sm block text-left ml-1">對戰模式：</label>
             <select id="player-mode-select" class="w-full p-4 bg-black/40 rounded-xl border-2 border-yellow-600/50 font-bold text-yellow-100 text-lg outline-none focus:border-yellow-400 cursor-pointer hover:bg-black/50 transition-colors">
-                <option value="3h1c">1 真人 + 3 電腦 (單人)</option>
-                <option value="1h3c">3 真人 + 1 電腦</option>
-                <option value="2h2c">2 真人 + 2 電腦</option>
-                <option value="4h">4 真人同機對戰 (派對)</option>
+                <option value="mode-1p" selected>1 真人 + 3 電腦 (單人挑戰)</option>
+                <option value="mode-2p">2 真人 + 2 電腦 (隨機入座)</option>
+                <option value="mode-3p">3 真人 + 1 電腦</option>
+                <option value="mode-4p">4 真人同機對戰 (派對模式)</option>
             </select>
         </div>
 
@@ -253,7 +253,7 @@
             <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover:animate-shine"></div>
             <span class="text-sm block font-normal text-yellow-300 mt-1 opacity-80 group-hover:opacity-100">(費用: 100 代幣)</span>
         </button>
-        <p class="text-[10px] text-yellow-500/50 mt-2">Mobile Optimized • 3D WebGL • Responsive</p>
+        <div class="absolute bottom-4 text-xs text-yellow-500/50">Audio Source: Music by 胤樂音樂</div>
     </div>
 </div>
 
@@ -311,7 +311,7 @@ class MahjongGame {
     constructor() {
         this.credits = 10000;
         this.rule = 'TW';
-        this.playerModes = '3h1c';
+        this.playerModes = 'mode-1p';
         this.turn = 0;
         this.wall = [];
         this.hands = [[],[],[],[]];
@@ -414,7 +414,7 @@ class MahjongGame {
         }
     }
     
-    // --- 修復：新增 animate 函數 ---
+    // --- 渲染循環 ---
     animate() {
         requestAnimationFrame(() => this.animate());
         TWEEN.update();
@@ -454,12 +454,20 @@ class MahjongGame {
         new TWEEN.Tween(this.controls.target).to(config.target, 800).easing(TWEEN.Easing.Quadratic.Out).start();
     }
 
+    // --- 修正後的真人/電腦判斷邏輯 ---
     isComputer(p) {
-        if(this.playerModes==='1h3c') return p!==0; // 0是人，其他電腦
-        if(this.playerModes==='3h1c') return p===3; // 3是電腦
-        if(this.playerModes==='2h2c') return p>=2;
-        if(this.playerModes==='4h') return false;
-        return true; // default safe
+        switch(this.playerModes) {
+            case 'mode-1p': // 1真3電：只有 P0 是人
+                return p !== 0; 
+            case 'mode-2p': // 2真2電：P0, P2 是人 (對家坐)，P1, P3 是電腦
+                return p !== 0 && p !== 2;
+            case 'mode-3p': // 3真1電：P0, P1, P2 是人，P3 是電腦
+                return p === 3;
+            case 'mode-4p': // 4真：都是人
+                return false;
+            default:
+                return p !== 0;
+        }
     }
 
     setupGame(r, m) {
@@ -572,7 +580,6 @@ class MahjongGame {
 
         for(let p=0; p<4; p++){
             const hand = this.hands[p], hasDraw = hand.length > hs+(this.melds[p].length*3)%3;
-            // 修正手牌寬度計算
             const off = ((hand.length * tW) / 2);
 
             // 聽牌檢查 (只對真人顯示)
@@ -596,7 +603,7 @@ class MahjongGame {
                 
                 // 只顯示自己(或全顯示模式)的牌面，電腦牌蓋著
                 if(!this.isComputer(p) || !this.isGameActive) this.addLabel(t, TILE_EMOJI[c], c);
-                else if(this.isComputer(p)) { /* 背面朝上，預設材質就是背面 */ }
+                else if(this.isComputer(p)) { /* 背面朝上 */ }
                 
                 t.position.set(x, tH/2, z); t.rotation.y = r;
                 t.userData = { owner:p, index:i, code:c, type:'hand' };
@@ -606,7 +613,6 @@ class MahjongGame {
 
             // 渲染鳴牌 (Melds)
             let mSt = (hand.length * tW / 2) + 1.5;
-            // 如果手牌多，鳴牌往外推
             if(p===1 || p===3) mSt += 1;
 
             this.melds[p].forEach((m, mi) => {
@@ -644,7 +650,6 @@ class MahjongGame {
     createTile(w,h,d) {
         const mat = (c) => new THREE.MeshPhongMaterial({color:c});
         // 0:右 1:左 2:上 3:下 4:前(面) 5:後(背)
-        // 麻將正面是 Index 4, 背面是 Index 5
         return new THREE.Mesh(new THREE.BoxGeometry(w,h,d), [
             mat(0xffffff), mat(0xffffff), mat(0xffffff), mat(0xffffff), 
             mat(0xffffff), mat(0x116a1e) // 背面綠色
@@ -1033,8 +1038,8 @@ class MahjongGame {
         const timeDiff = Date.now() - this.pointerDownTime;
         const distDiff = Math.hypot(clientX - this.pointerDownPos.x, clientY - this.pointerDownPos.y);
         
-        // 判定為點擊而非拖曳
-        if (timeDiff < 500 && distDiff < 10) {
+        // 判定為點擊而非拖曳 (容忍度增加到 30)
+        if (timeDiff < 500 && distDiff < 30) {
             this.handleTap(clientX, clientY);
         }
     }
@@ -1107,14 +1112,15 @@ class MahjongGame {
     }
 
     handleTap(clientX, clientY) {
-        if (!this.isGameActive || this.waitingForAction) {
+        if (!this.isGameActive) return;
+        
+        // 自摸過水檢測
+        if (this.waitingForAction) {
              if (this.currentActionContext && this.currentActionContext.type === 'tsumo') {
-                 // 允許自摸時點擊空白處取消預覽，但不允許打牌
-                 this.hidePreview();
-                 this.clearSelection();
+                 // 允許操作
+             } else {
                  return;
              }
-             return;
         }
 
         const currentId = this.turn % 4;
@@ -1146,6 +1152,12 @@ class MahjongGame {
     onTileClick(obj, playerId) {
         // 如果再次點擊同一張牌 -> 出牌
         if (this.selectedTile === obj) {
+             if (this.waitingForAction && this.currentActionContext && this.currentActionContext.type === 'tsumo') {
+                this.showMessage("過水");
+                document.getElementById('action-btns').classList.add('hidden');
+                this.waitingForAction = false;
+                this.currentActionContext = null;
+            }
             this.discardTile(playerId, obj.userData.index);
             this.clearSelection();
         } else {
@@ -1161,9 +1173,17 @@ class MahjongGame {
     }
     
     confirmDiscardFromPreview() {
-        if(this.selectedTile && !this.waitingForAction && this.isGameActive) {
+        const isTsumoWait = this.waitingForAction && this.currentActionContext && this.currentActionContext.type === 'tsumo';
+        
+        if(this.selectedTile && (!this.waitingForAction || isTsumoWait) && this.isGameActive) {
             const owner = this.selectedTile.userData.owner;
             if(owner === (this.turn % 4) && !this.isComputer(owner)) {
+                if(isTsumoWait) {
+                    this.showMessage("過水");
+                    document.getElementById('action-btns').classList.add('hidden');
+                    this.waitingForAction = false;
+                    this.currentActionContext = null;
+                }
                 this.discardTile(owner, this.selectedTile.userData.index);
                 this.clearSelection();
             }
@@ -1195,6 +1215,13 @@ class MahjongGame {
         void box.offsetWidth;
         box.classList.add('preview-anim');
         overlay.style.opacity = '1';
+        
+        if (!this.waitingForAction) {
+             if(this._previewTimeout) clearTimeout(this._previewTimeout);
+             this._previewTimeout = setTimeout(() => { 
+                if(!this.waitingForAction && !this.selectedTile) overlay.style.opacity = '0'; 
+            }, 2000);
+        }
     }
     
     hidePreview() { document.getElementById('preview-overlay').style.opacity = '0'; }
@@ -1215,8 +1242,7 @@ class MahjongGame {
         
         if(winner !== -1 && !this.isComputer(winner)) this.updateCredits(coins);
         // 如果是真人輸了
-        if(winner !== -1 && this.isComputer(winner) && this.playerModes === '3h1c') {
-            // 簡化：單人模式下只顯示一種扣分
+        if(winner !== -1 && this.isComputer(winner) && this.playerModes === 'mode-1p') {
             this.updateCredits(-coins); 
         }
     }
