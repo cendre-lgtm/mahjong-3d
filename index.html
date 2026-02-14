@@ -845,17 +845,32 @@ class MahjongGame {
         this.showFocusTile(tile, label);
         this.hidePreview();
 
-        if (playerId !== 0) { 
-            if (!this.isComputer(0)) {
-                const actions = this.checkAvailableActions(tile, playerId);
-                if (actions.length > 0) {
-                    this.triggerPlayerAction(actions, tile, playerId);
-                    return; 
-                }
+        // 檢查其他真人玩家是否能榮胡/碰/吃
+        // 我們需要遍歷所有對手 (非出牌者)
+        // 優先順序：胡 > 碰/槓 > 吃
+        // 這裡簡化邏輯：如果多人同時喊，這裡只取順位最近的一位 (實際規則更複雜)
+        // 這裡暫時只檢查一個動作，若有，則中斷
+        
+        let actionTriggered = false;
+        
+        // 迴圈檢查其他三家
+        for (let i = 1; i < 4; i++) {
+            const checkPlayerId = (playerId + i) % 4;
+            
+            // 如果該玩家是電腦，跳過 (電腦不吃碰槓)
+            if (this.isComputer(checkPlayerId)) continue;
+            
+            const actions = this.checkAvailableActions(tile, playerId, checkPlayerId);
+            if (actions.length > 0) {
+                this.triggerPlayerAction(actions, tile, playerId, false, checkPlayerId); // 傳入觸發動作的玩家ID
+                actionTriggered = true;
+                break; // 暫時只處理一位玩家的動作，避免衝突
             }
         }
-        
-        this.finishTurn();
+
+        if (!actionTriggered) {
+            this.finishTurn();
+        }
     }
 
     finishTurn() {
@@ -863,23 +878,25 @@ class MahjongGame {
         this.nextTurn();
     }
 
-    checkAvailableActions(tileCode, discarderId) {
-        const p0Hand = this.hands[0];
+    checkAvailableActions(tileCode, discarderId, checkerId) {
+        const hand = this.hands[checkerId];
         const actions = [];
         
-        const tempHand = [...p0Hand, tileCode];
+        const tempHand = [...hand, tileCode];
         if (this.checkWin(tempHand)) {
             actions.push('hu');
         }
 
-        const sameCount = p0Hand.filter(t => t === tileCode).length;
+        const sameCount = hand.filter(t => t === tileCode).length;
         if (sameCount >= 2) actions.push('pon');
         if (sameCount >= 3) actions.push('kan');
         
-        if (discarderId === 3 && tileCode.match(/[MPS]/)) { 
+        // 只有下家能吃上家
+        // discarderId -> checkerId 必須是 discarderId + 1 = checkerId (mod 4)
+        if ((discarderId + 1) % 4 === checkerId && tileCode.match(/[MPS]/)) { 
             const suit = tileCode.charAt(0);
             const num = parseInt(tileCode.charAt(1));
-            const handNums = p0Hand.filter(t => t.startsWith(suit)).map(t => parseInt(t.charAt(1)));
+            const handNums = hand.filter(t => t.startsWith(suit)).map(t => parseInt(t.charAt(1)));
             
             const hasLeft = handNums.includes(num-2) && handNums.includes(num-1);
             const hasMiddle = handNums.includes(num-1) && handNums.includes(num+1);
@@ -891,10 +908,20 @@ class MahjongGame {
         return actions;
     }
 
-    triggerPlayerAction(actions, tileCode, discarderId) {
+    // 更新：加入 playerIdx 參數，讓我們知道是誰在操作
+    triggerPlayerAction(actions, tileCode, discarderId, isSelfDraw, playerIdx = 0) {
         this.waitingForAction = true;
-        this.currentActionContext = { tile: tileCode, from: discarderId, type: 'ron' };
+        this.currentActionContext = { tile: tileCode, from: discarderId, type: isSelfDraw ? 'tsumo' : 'ron', playerIdx: playerIdx };
         
+        // 自動切換視角到該玩家 (如果是別人打牌觸發)
+        if (!isSelfDraw && this.autoCamera) {
+            // 暫時切換到該玩家視角
+            const config = this.baseCameraPositions[playerIdx];
+            const targetPos = this.getResponsiveCameraPosition(config.pos);
+            new TWEEN.Tween(this.camera.position).to(targetPos, 500).easing(TWEEN.Easing.Cubic.Out).start();
+            new TWEEN.Tween(this.controls.target).to(config.target, 500).easing(TWEEN.Easing.Cubic.Out).start();
+        }
+
         document.getElementById('action-btns').classList.remove('hidden');
         
         ['chi', 'pon', 'kan', 'hu'].forEach(act => {
@@ -946,28 +973,30 @@ class MahjongGame {
         const tile = ctx.tile;
         const fromPlayer = ctx.from;
         
+        // 既然要吃碰槓，就把那張牌從棄牌堆拿走
         this.discards[fromPlayer].pop();
         
         if (action === 'pon' || action === 'chi') {
-            this.executeMeld(0, action, tile);
+            this.executeMeld(ctx.playerIdx, action, tile);
             
-            this.turn = 0; 
+            // 轉移回合權
+            this.turn = ctx.playerIdx; 
             this.renderTiles();
             this.updateUI();
-            document.getElementById('turn-indicator').innerText = "請出牌";
+            document.getElementById('turn-indicator').innerText = `輪到 玩家 ${ctx.playerIdx+1} 出牌`;
             
         } else if (action === 'kan') {
-            this.executeMeld(0, 'kan', tile);
+            this.executeMeld(ctx.playerIdx, 'kan', tile);
             if(this.wall.length > 0) {
                 const newTile = this.wall.pop();
-                this.hands[0].push(newTile);
+                this.hands[ctx.playerIdx].push(newTile);
                 this.showMessage("槓上開花?");
                 this.renderTiles();
-                this.turn = 0;
+                this.turn = ctx.playerIdx;
             }
         } else if (action === 'hu') {
             this.surpriseEffect("🧧 胡啦！恭喜發財！");
-            this.updateCredits(500); // 獎勵
+            this.updateCredits(500); 
             this.endGame();
         }
     }
@@ -1006,9 +1035,11 @@ class MahjongGame {
                 }
             }
         } else if (type === 'chi') {
+            // 簡單實作：自動找第一組能吃的組合
             const suit = targetTile.charAt(0);
             const num = parseInt(targetTile.charAt(1));
             
+            // 嘗試尋找前後牌 (這裡簡化，只找一種組合)
             const tryRemove = (n) => {
                 const code = suit + n;
                 const idx = hand.indexOf(code);
@@ -1020,11 +1051,14 @@ class MahjongGame {
                 return false;
             };
             
+            // 優先找 num-1, num+1 (中洞吃)
             if (tryRemove(num-1) && tryRemove(num+1)) {} 
+            // 或是 num-2, num-1
             else if (tryRemove(num-2) && tryRemove(num-1)) {}
+            // 或是 num+1, num+2
             else if (tryRemove(num+1) && tryRemove(num+2)) {}
             
-            meld.sort(); 
+            meld.sort(); // 排序一下比較好看
         }
         
         this.melds[playerId].push(meld);
@@ -1127,7 +1161,9 @@ class MahjongGame {
         }
 
         const currentId = this.turn % 4;
-        if (currentId !== 0 && !this.isComputer(currentId)) return; 
+        
+        // 修正：移除了限制 "currentId !== 0" 的判斷
+        // 只要當前輪到的玩家不是電腦，就允許操作 (適用於多人同機模式)
         if (this.isComputer(currentId)) return; 
 
         this.mouse.x = (clientX / window.innerWidth) * 2 - 1;
