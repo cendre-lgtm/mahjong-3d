@@ -13,7 +13,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body { margin: 0; overflow: hidden; background: #2d0a0a; font-family: 'Microsoft JhengHei', sans-serif; touch-action: none; user-select: none; -webkit-user-select: none; }
-        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; }
+        #ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 50; }
         .interactive { pointer-events: auto; }
         canvas { display: block; }
         
@@ -59,6 +59,7 @@
         .gold-text { color: #d4af37; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); }
         .red-panel { background: rgba(139, 0, 0, 0.85); border: 2px solid #d4af37; box-shadow: 0 4px 20px rgba(0,0,0,0.6); }
         
+        /* 結束按鈕特別樣式 */
         .btn-exit {
             background: linear-gradient(135deg, #c0392b 0%, #8e44ad 100%);
             color: white; border: 2px solid #e74c3c;
@@ -68,11 +69,10 @@
             display: flex; align-items: center; gap: 5px;
             padding: 6px 12px; font-size: 0.8rem;
         }
-        @media (min-width: 768px) {
-            .btn-exit { padding: 8px 16px; font-size: 0.9rem; }
-        }
+        @media (min-width: 768px) { .btn-exit { padding: 8px 16px; font-size: 0.9rem; } }
         .btn-exit:active { transform: scale(0.95); }
 
+        /* 驚喜動畫 */
         @keyframes firework {
             0% { transform: scale(0.5); opacity: 0; }
             50% { transform: scale(1.2); opacity: 1; }
@@ -80,15 +80,15 @@
         }
         .surprise-text { animation: firework 0.5s ease-out forwards; }
 
-        @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        /* 特寫動畫 */
         .preview-anim { animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
+        /* 操作指引提示 */
         .tutorial-hint { animation: pulse 2s infinite; }
         @keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
 
+        /* 右下角功能按鈕群 */
         .ctrl-btn {
             background: rgba(0,0,0,0.6); border: 1px solid #d4af37;
             color: #d4af37; border-radius: 50%; 
@@ -97,9 +97,7 @@
             transition: all 0.3s;
             width: 40px; height: 40px; font-size: 20px;
         }
-        @media (min-width: 768px) {
-            .ctrl-btn { width: 50px; height: 50px; font-size: 24px; }
-        }
+        @media (min-width: 768px) { .ctrl-btn { width: 50px; height: 50px; font-size: 24px; } }
         .ctrl-btn.active { background: #d4af37; color: #000; box-shadow: 0 0 10px #d4af37; }
         
         .hidden-ctrl { display: none !important; }
@@ -126,6 +124,15 @@
             animation: fadeUp 1s forwards;
             pointer-events: none;
         }
+        
+        /* 吃牌選擇按鈕 */
+        .btn-chi-select {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border: 2px solid #6ee7b7; color: white;
+            padding: 10px 20px; border-radius: 12px; font-size: 1.5rem;
+            display: flex; gap: 5px; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .btn-chi-select:active { transform: scale(0.95); }
     </style>
 </head>
 <body>
@@ -183,6 +190,11 @@
             <button id="btn-kan" onclick="game.handlePlayerAction('kan')" class="btn-festive bg-purple-600 text-white border-purple-300 shadow-[0_0_20px_rgba(147,51,234,0.6)]">槓</button>
             <button id="btn-hu" onclick="game.handlePlayerAction('hu')" class="btn-festive !bg-red-600 !text-white !border-white !shadow-[0_0_25px_rgba(220,38,38,0.8)]">胡</button>
             <button id="btn-skip" onclick="game.handlePlayerAction('skip')" class="btn-festive !bg-gray-700 !text-gray-200 !border-gray-500">過</button>
+        </div>
+
+        <!-- 吃牌選擇群 (獨立顯示) -->
+        <div id="chi-select-btns" class="flex flex-wrap justify-center gap-4 hidden pointer-events-auto transform scale-90 md:scale-100 max-w-[95vw]">
+            <!-- 動態生成選項 -->
         </div>
     </div>
 
@@ -242,6 +254,16 @@
             開 局 贏 紅 包 <span class="text-sm block font-normal text-yellow-300 mt-1">(費用: 100 代幣)</span>
         </button>
         <p class="text-xs text-yellow-600">※ 音樂將於開局後自動播放 ※</p>
+    </div>
+</div>
+
+<div id="result-overlay" class="fixed inset-0 hidden items-center justify-center bg-black/90 z-[100] p-6">
+    <div class="max-w-sm w-full bg-red-950 border-4 border-yellow-500 rounded-3xl p-8 text-center text-white">
+        <h2 class="text-4xl font-black text-yellow-400 mb-4" id="result-title">大吉大利！</h2>
+        <div class="text-xl mb-6" id="result-winner"></div>
+        <div class="flex flex-wrap justify-center gap-1 text-3xl mb-6 p-4 rounded-xl bg-white/10" id="result-hand"></div>
+        <div class="text-2xl font-bold text-yellow-300 mb-8" id="result-coins"></div>
+        <button onclick="location.reload()" class="btn-festive w-full py-4 text-xl">再開一局</button>
     </div>
 </div>
 
@@ -535,10 +557,10 @@ class MahjongGame {
         while(this.labelsGroup.children.length > 0) this.labelsGroup.remove(this.labelsGroup.children[0]); 
 
         const positions = [
-            { x: 0, z: 13, ry: 0 },          // P0
-            { x: 13, z: 0, ry: Math.PI/2 }, // P1
-            { x: 0, z: -13, ry: Math.PI },  // P2
-            { x: -13, z: 0, ry: -Math.PI/2 } // P3
+            { x: 0, z: 13, ry: 0 },          
+            { x: 13, z: 0, ry: Math.PI/2 }, 
+            { x: 0, z: -13, ry: Math.PI },  
+            { x: -13, z: 0, ry: -Math.PI/2 } 
         ];
 
         for(let i=0; i<4; i++) {
@@ -950,6 +972,7 @@ class MahjongGame {
         }
     }
 
+    // 新增確認出牌方法 (從預覽區點擊觸發)
     confirmDiscardFromPreview() {
         if (this.selectedTile && !this.waitingForAction && this.isGameActive) {
             const owner = this.selectedTile.userData.owner;
@@ -1018,8 +1041,8 @@ class MahjongGame {
         emoji.innerText = TILE_EMOJI[tileCode];
         text.innerText = playerName + " 打出";
         sub.innerText = "";
-        hint.classList.add('hidden'); 
-        box.classList.remove('interactive-preview'); 
+        hint.classList.add('hidden'); // 對方打牌時，不能點擊預覽出牌
+        box.classList.remove('interactive-preview'); // 移除互動樣式
         
         box.classList.remove('preview-anim');
         void box.offsetWidth;
@@ -1042,8 +1065,8 @@ class MahjongGame {
         emoji.innerText = TILE_EMOJI[tileCode];
         text.innerText = "已選取";
         sub.innerText = "(再次點擊出牌)";
-        hint.classList.remove('hidden'); 
-        box.classList.add('interactive-preview'); 
+        hint.classList.remove('hidden'); // 顯示點擊提示
+        box.classList.add('interactive-preview'); // 增加互動樣式
         
         box.classList.remove('preview-anim');
         void box.offsetWidth;
@@ -1097,16 +1120,14 @@ class MahjongGame {
     handleTap(clientX, clientY) {
         if (!this.isGameActive || this.waitingForAction) {
             if (this.currentActionContext && this.currentActionContext.type === 'tsumo') {
-                // 允許自摸狀態下點擊手牌出牌
+                // allow
             } else {
                 return;
             }
         }
 
         const currentId = this.turn % 4;
-        
-        // --- 修正重點：解除非玩家1的操作限制 ---
-        // 只要當前回合的玩家不是電腦，就允許他點擊螢幕進行選牌操作
+        if (currentId !== 0 && !this.isComputer(currentId)) return; 
         if (this.isComputer(currentId)) return; 
 
         this.mouse.x = (clientX / window.innerWidth) * 2 - 1;
@@ -1121,7 +1142,6 @@ class MahjongGame {
                 targetObj = targetObj.parent;
             }
 
-            // 確保玩家只能點擊屬於他自己的牌
             if(targetObj && targetObj.userData.owner === currentId) {
                 this.onTileClick(targetObj, currentId);
             }
